@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>색상 및 숫자 입력 예제</title>
+  </head>
+  <body>
+    <h3>색상 및 숫자 입력 예제</h3>
+    <form method="get" action="all_result.html">
+      <p>표지색상 : <input type="color" name="color " /></p>
+      <p>
+        제작권수 :
+        <input
+          type="number"
+          name="number"
+          min="-100"
+          max="100"
+          step="10"
+          value="20"
+        />
+      </p>
+      <p>
+        표지두께 : 0.1mm
+        <input type="range" name="range" min="1" max="5" value="3" /> 0.5mm
+      </p>
+      <hr />
+      <input type="submit" value="전송하기" />
+    </form>
+  </body>
+</html>

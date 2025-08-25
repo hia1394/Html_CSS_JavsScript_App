@@ -1,0 +1,12 @@
+h3 {
+    color: blue;
+    font-family: Arial, sans-serif;
+  }
+  p {
+    font-size: 11pt;
+    color: #333333;
+  }
+  strong {
+    color: red;
+    font-weight: bold;
+  }

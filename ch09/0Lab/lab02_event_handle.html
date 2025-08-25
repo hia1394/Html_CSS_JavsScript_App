@@ -1,0 +1,163 @@
+<!--
+연습문제 2: 동적 리스트 관리
+문제: 할 일 목록(Todo List)을 만드세요.
+
+새로운 할 일을 추가할 수 있는 입력 칸
+목록에 항목 추가하기
+완료된 항목에 취소선 표시하기
+항목 삭제하기
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>할 일 목록</title>
+<style>
+    .container {
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+    }
+    #addContainer {
+        display: flex;
+        margin-bottom: 20px;
+    }
+    #todoInput {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+    #addBtn {
+        padding: 10px 20px;
+        margin-left: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .todo-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    .completed {
+        text-decoration: line-through;
+        color: #888;
+    }
+    .delete-btn {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    .complete-btn {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-right: 5px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>할 일 목록</h1>
+    <div id="addContainer">
+        <input type="text" id="todoInput" placeholder="새로운 할 일을 입력하세요...">
+        <button id="addBtn" onclick="addTodo()">추가</button>
+    </div>
+    <div id="todoList"></div>
+</div>
+
+<script>
+var todoList = [];
+var todoId = 0;
+
+function addTodo() {
+    var input = document.getElementById('todoInput');
+    var text = input.value.trim();
+    
+    if (text === '') {
+        alert('할 일을 입력해주세요!');
+        return;
+    }
+    
+    var todo = {
+        id: todoId++,
+        text: text,
+        completed: false
+    };
+    
+    todoList.push(todo);
+    input.value = '';
+    renderTodos();
+}
+
+function toggleComplete(id) {
+    var todo = todoList.find(item => item.id === id);
+    if (todo) {
+        todo.completed = !todo.completed;
+        renderTodos();
+    }
+}
+
+function deleteTodo(id) {
+    todoList = todoList.filter(item => item.id !== id);
+    renderTodos();
+}
+
+function renderTodos() {
+    var listContainer = document.getElementById('todoList');
+    listContainer.innerHTML = '';
+    
+    todoList.forEach(function(todo) {
+        var todoItem = document.createElement('div');
+        todoItem.className = 'todo-item';
+        
+        var textSpan = document.createElement('span');
+        textSpan.textContent = todo.text;
+        if (todo.completed) {
+            textSpan.className = 'completed';
+        }
+        
+        var buttonContainer = document.createElement('div');
+        
+        var completeBtn = document.createElement('button');
+        completeBtn.className = 'complete-btn';
+        completeBtn.textContent = todo.completed ? '취소' : '완료';
+        completeBtn.onclick = function() { toggleComplete(todo.id); };
+        
+        var deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.textContent = '삭제';
+        deleteBtn.onclick = function() { deleteTodo(todo.id); };
+        
+        buttonContainer.appendChild(completeBtn);
+        buttonContainer.appendChild(deleteBtn);
+        
+        todoItem.appendChild(textSpan);
+        todoItem.appendChild(buttonContainer);
+        
+        listContainer.appendChild(todoItem);
+    });
+}
+
+// Enter 키로 추가
+document.getElementById('todoInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        addTodo();
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!--
+표 (ex206_table.html, ex207_table_cell.html, ex208_table_advanced.html 기반)
+    연습문제 6: 다음 내용을 표(<table>)로 작성하시오. 셀 병합과 표 구조화 태그(<thead>, <tbody>, <tfoot>)를 활용하세요.
+    프로그래밍 언어 비교표
+    언어명 | 주요 용도 | 난이도
+    JavaScript | 웹 프론트엔드 | 중간
+    Python | 데이터 분석, 인공지능 | 쉬움
+    Java | 기업용 애플리케이션 | 어려움
+    총 언어 수: 3개    
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>프로그래밍 언어 비교표</title>
+</head>
+<body>
+  <h1>프로그래밍 언어 비교표</h1>
+  <table>
+    <caption>프로그래밍 언어 비교</caption>
+    <thead>
+      <tr>
+        <th>언어명</th>
+        <th>주요 용도</th>
+        <th>난이도</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>JavaScript</td>
+        <td>웹 프론트엔드</td>
+        <td>중간</td>
+      </tr>
+      <tr>
+        <td>Python</td>
+        <td>데이터 분석, 인공지능</td>
+        <td>쉬움</td>
+      </tr>
+      <tr>
+        <td>Java</td>
+        <td>기업용 애플리케이션</td>
+        <td>어려움</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="2">총 언어 수</th>
+        <td>3개</td>
+      </tr>
+    </tfoot>
+  </table>
+</body>
+</html>

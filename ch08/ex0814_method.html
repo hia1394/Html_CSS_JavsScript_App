@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title> Method </title>
+</head>
+<body>
+<script type = "text/javascript">
+
+  function display_book() {
+    document.write("Title: " + this.title + "<br/>");
+    document.write("Publisher: " + this.publisher + "<br/>");
+    document.write("Author: " + this.author + "<br/>");
+    document.write("Price: " + this.price + "원 <br/>");
+    document.write("Pages: " + this.pages + "<br/>");
+  }
+
+  function book (title_value, publisher_value, author_value, price_value, pages_value) {
+    this.title = title_value;
+    this.publisher = publisher_value;
+    this.author = author_value;
+    this.price = price_value;
+    this.pages= pages_value;
+    this.display = display_book;
+    }
+
+  var book_obj = new book("멀티미디어 배움터2.0", "생능출판사", "최윤철, 임순범", 25000, 442);
+
+  book_obj.display();
+
+</script>
+</body>
+</html>

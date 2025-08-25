@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Show Google Map with a Marker at Current Location</title>
+<script type="text/javascript">
+<!--
+    var maptype = "roadmap";
+
+    function showCurrentLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(getPosition);
+        }
+        else {
+            document.write("This web browser dos not support geolocation.");
+        }
+    }
+
+    function getPosition(p) {
+        currentLat = p.coords.latitude;
+        currentLng = p.coords.longitude;
+        showMap(currentLat, currentLng);
+    }
+    
+    function showMap(lat, lng) {
+        var url = "http://maps.googleapis.com/maps/api/staticmap?" +
+                  "center=" + lat + "," + lng +
+                  "&size=600x500" +
+                  "&maptype=" + maptype +
+                  "&zoom=15" +
+                  "&markers=color:blue|" + lat + "," + lng +
+                  "&sensor=true";
+        document.body.style.backgroundImage = "url(" + url + ")";
+    }
+-->
+</script>
+</head>
+<body onload="showCurrentLocation();">
+    <button onclick="maptype = 'roadmap'; showCurrentLocation();">Roadmap</button>
+    <button onclick="maptype = 'satellite'; showCurrentLocation();">Satellite</button>
+    <button onclick="maptype = 'terrain'; showCurrentLocation();">Terrain</button>
+</body>
+</html>

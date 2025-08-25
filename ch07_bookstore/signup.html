@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title> Signup Page </title>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body id="signup">
+    <form>    
+      <fieldset>
+        <legend>회원가입</legend>
+        <span>사용자 아이디</span>
+        <input id="username2" name="username2" type="text" required/>
+        <input id="dup_check" type="button" value="중복체크" disabled/><br/>
+        <span>비밀번호</span> <input id="pass1" name="pass1" type="password" required><br/>
+        <span>비밀번호 확인</span> <input id="pass2" name="pass2" type="password" required><br/>
+        <span>이름</span> <input name="name" type="text" required><br/>
+        <span>전화번호</span> <input name="phone" type="tel" required/><br/>
+        <span>이메일</span> <input name="email" type="email" required><br/>
+        <span>생일</span> <input name="birthday" type="date" required/><br/>
+        <span>연령대</span>
+        <select name="age" required>
+            <option value="">선택하세요</option>
+            <option value="10">10대 이하</option>
+            <option value="20">20대</option>
+            <option value="30">30대</option>
+            <option value="40">40대</option>
+            <option value="50">50대 이상</option>
+        </select><br/>
+        <span>관심분야</span>
+        <label>인문학
+          <input type="checkbox" value="humanity" name="interest"></label>
+        <label>교육
+          <input type="checkbox" value="education" name="interest"></label>
+        <label>예술
+          <input type="checkbox" value="art" name="interest"></label>
+        <label>컴퓨터
+          <input type="checkbox" value="computer" name="interest"></label>
+        <label>기타분야
+          <input type="checkbox" value="etc" name="interest"></label>
+        <br/>
+        <span>배경 색상</span> <input name="color" type="color"/><br/>
+        간단한 자기소개<br/>
+        <textarea name="introduction" cols="30" rows="5" placeholder="간단한 자기소개를 써 주세요."></textarea>
+      </fieldset>
+      <input id="signup_button" type="submit" value="회원가입" disabled/>
+      <input id="reset2" type="button" value="취소" disabled/>
+    </form> 
+    <script type="text/javascript" src="js/signup.js"></script>
+</body>
+</html>

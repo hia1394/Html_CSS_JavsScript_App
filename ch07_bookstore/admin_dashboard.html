@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>관리자 대시보드</title>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<style>
+.dashboard {
+    padding: 20px;
+    background-color: #f5f5f5;
+    margin: 10px;
+    border-radius: 8px;
+}
+.dashboard h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+.dashboard-item {
+    background-color: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.dashboard-stats {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.stat-card {
+    background-color: #3498db;
+    color: white;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    text-align: center;
+    flex: 1;
+    min-width: 150px;
+}
+</style>
+</head>
+<body>
+<div class="dashboard">
+    <h2>관리자 대시보드</h2>
+    <p>환영합니다, 관리자님!</p>
+    
+    <div class="dashboard-item">
+        <h3>오늘의 통계</h3>
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <h4>총 주문</h4>
+                <p>15건</p>
+            </div>
+            <div class="stat-card">
+                <h4>신규 회원</h4>
+                <p>3명</p>
+            </div>
+            <div class="stat-card">
+                <h4>매출액</h4>
+                <p>750,000원</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dashboard-item">
+        <h3>관리 메뉴</h3>
+        <button onclick="manageUsers()">회원 관리</button>
+        <button onclick="manageBooks()">도서 관리</button>
+        <button onclick="manageOrders()">주문 관리</button>
+        <button onclick="viewStatistics()">통계 조회</button>
+    </div>
+    
+    <div class="dashboard-item">
+        <h3>최근 활동</h3>
+        <ul>
+            <li>홍길동님이 회원가입을 했습니다.</li>
+            <li>김서점님이 JavaScript 책을 주문했습니다.</li>
+            <li>최윤철님이 로그인했습니다.</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+function manageUsers() {
+    alert('회원 관리 기능입니다.');
+}
+
+function manageBooks() {
+    alert('도서 관리 기능입니다.');
+}
+
+function manageOrders() {
+    alert('주문 관리 기능입니다.');
+}
+
+function viewStatistics() {
+    alert('통계 조회 기능입니다.');
+}
+</script>
+</body>
+</html>

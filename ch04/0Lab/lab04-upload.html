@@ -1,0 +1,39 @@
+<!--
+연습문제 4: 파일 업로드와 히든 필드 활용하기
+문제: 사용자 프로필 업데이트 폼을 만드세요. 사용자 이름, 자기소개, 프로필 사진 업로드(file input 사용)를 포함하고, 
+사용자 ID는 히든 필드로 전송되어야 합니다.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>프로필 업데이트</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h2>프로필 업데이트</h2>
+  <form method="get" action="../all_result.html" enctype="multipart/form-data">
+    <!-- 사용자 ID는 히든 필드로 전송 -->
+    <input type="hidden" name="user_id" value="12345">
+    
+    <p>
+      <label for="username">사용자 이름:</label><br>
+      <input type="text" id="username" name="username" value="홍길동" required>
+    </p>
+    
+    <p>
+      <label for="bio">자기소개:</label><br>
+      <textarea id="bio" name="bio" rows="5" cols="50">안녕하세요, 저는 홍길동입니다.</textarea>
+    </p>
+    
+    <p>
+      <label for="profile_pic">프로필 사진:</label><br>
+      <input type="file" id="profile_pic" name="profile_pic" accept="image/*">
+    </p>
+    
+    <p>
+      <input type="submit" value="업데이트">
+      <input type="reset" value="취소">
+    </p>
+  </form>
+</body>
+</html>

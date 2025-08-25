@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!-- Canvas 그림그리기 예제 -->
+<html>
+<head>
+<title> rect drawing </title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="300" height="200"></canvas>
+
+<script type="text/javascript">
+  var canvas = document.getElementById("myCanvas");
+  var context = canvas.getContext("2d");
+
+  context.rect(50, 50, 100, 100);
+  context.rect(20, 20, 180, 180);
+  context.rect(120, 120, 50, 50);
+  context.stroke();
+</script>
+
+
+</body>
+</html>

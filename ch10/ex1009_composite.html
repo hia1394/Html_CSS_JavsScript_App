@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- Composition 예제 -->
+<html>
+<head>
+<title> Composition </title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="120" height="120"></canvas>
+
+<script type="text/javascript">
+  var canvas = document.getElementById("myCanvas");
+  var context = canvas.getContext("2d");
+
+  context.beginPath();
+  context.rect(40, 10, 60, 100);
+  context.closePath();
+  context.stroke();
+  context.clip();
+
+  context.beginPath();
+  context.rect(20, 20, 60, 60);
+  context.fillStyle = "green";
+  context.shadowColor = "blue";
+  context.shadowBlur = 30;
+  context.shadowOffsetX = 10;
+  context.shadowOffsetY = 20;
+  context.fill();
+
+  context.beginPath();
+  context.arc(80, 30, 30, 0, 2*Math.PI);
+  context.fillStyle = "red";
+  context.globalAlpha = 0.5;
+  context.shadowColor = "transparent";
+  context.fill();
+</script>
+
+</body>
+</html>

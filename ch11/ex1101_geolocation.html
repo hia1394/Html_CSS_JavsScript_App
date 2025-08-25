@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>위치정보 가져오기</title>
+    <link rel="stylesheet" href="../res/api.css">
+</head>
+<body>
+<table>
+	<tr><td>Timestamp</td><td id="ts"></td></tr>
+	<tr><td>Position</td><td id="position"></td></tr>
+</table>
+<br>
+<div>
+    <span class="button" onclick="clickGetPosition();">Get Position</span>
+</div>
+
+<script type="text/javascript">
+function clickGetPosition() {
+    if (navigator.geolocation) {
+        function success(position) {
+            var d = new Date(position.timestamp);
+
+            // Date.toUTCString() 메소드는 시간을 국제표준시 문자열로 변환            
+            document.getElementById("ts").innerHTML = d.toUTCString() ;
+            document.getElementById("position").innerHTML = 
+                "(" + position.coords.latitude + ", " + 
+                position.coords.longitude + ")";
+        }
+
+        navigator.geolocation.getCurrentPosition(success);
+    } else {
+        alert("No support");
+    }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>위치정보 추적하기</title>
+    <link rel="stylesheet" href="../res/api.css">
+</head>
+<body>
+<table>
+    <tr><td>Timestamp</td><td id="ts"></td></tr>
+    <tr><td>Position</td><td id="position"></td></tr>
+</table>
+<br>
+<div>
+    <span class="button" onclick="clickStart();">Start</span>
+    <span class="button" onclick="clickEnd();">End</span>
+</div>
+
+<script type="text/javascript">
+var geoId;
+
+function clickStart() {
+    if (navigator.geolocation) {
+        function success(position) {
+            var d = new Date(position.timestamp);
+
+            document.getElementById("ts").innerHTML = d.toUTCString();
+            document.getElementById("position").innerHTML = 
+                "(" + position.coords.latitude + ", " + 
+                position.coords.longitude + ")";
+        }
+
+        geoId = navigator.geolocation.watchPosition(success);
+    } else {
+        alert("No support");
+    }
+}
+
+function clickEnd() {
+    if (navigator.geolocation) {
+        navigator.geolocation.clearWatch(geoId);
+    } else {
+        alert("No support");
+    }
+}
+</script>
+</body>
+</html>

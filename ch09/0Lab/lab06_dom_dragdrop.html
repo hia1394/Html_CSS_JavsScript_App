@@ -1,0 +1,244 @@
+<!--
+연습문제 6: 드래그 앤 드롭 정렬
+문제: 드래그 앤 드롭으로 리스트의 순서를 변경할 수 있는 프로그램을 만드세요.
+
+항목들을 드래그하여 순서 변경
+삭제 영역으로 드래그하면 항목 삭제
+새로운 항목 추가 기능
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>드래그 앤 드롭 정렬</title>
+<style>
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+    }
+    
+    .add-item {
+        margin-bottom: 20px;
+    }
+    
+    .add-item input {
+        padding: 10px;
+        width: 250px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    
+    .add-item button {
+        padding: 10px 20px;
+        margin-left: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .sortable-list {
+        min-height: 300px;
+        background-color: #f9f9f9;
+        border: 2px dashed #ddd;
+        border-radius: 5px;
+        padding: 20px;
+    }
+    
+    .list-item {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 10px;
+        cursor: move;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        user-select: none;
+    }
+    
+    .list-item:hover {
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .list-item.dragging {
+        opacity: 0.5;
+    }
+    
+    .list-item.drag-over {
+        border-color: #007bff;
+        border-style: solid;
+    }
+    
+    .delete-zone {
+        background-color: #dc3545;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        border: 2px dashed transparent;
+        transition: all 0.3s ease;
+    }
+    
+    .delete-zone.drag-over {
+        border-color: #fff;
+        background-color: #c82333;
+    }
+    
+    .item-number {
+        background-color: #007bff;
+        color: white;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+    
+    .item-content {
+        flex-grow: 1;
+        margin: 0 15px;
+    }
+    
+    .drag-handle {
+        cursor: move;
+        color: #666;
+        font-size: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>드래그 앤 드롭 정렬</h1>
+    
+    <div class="add-item">
+        <input type="text" id="newItemInput" placeholder="새 항목을 입력하세요...">
+        <button onclick="addItem()">추가</button>
+    </div>
+    
+    <div class="sortable-list" id="sortableList">
+        <!-- 항목들이 여기에 추가됩니다 -->
+    </div>
+    
+    <div class="delete-zone" id="deleteZone">
+        <h3>🗑️ 여기로 드래그하여 삭제</h3>
+    </div>
+</div>
+
+<script>
+var items = [
+    "첫 번째 항목",
+    "두 번째 항목",
+    "세 번째 항목",
+    "네 번째 항목",
+    "다섯 번째 항목"
+];
+
+var draggedElement = null;
+
+function renderList() {
+    var listContainer = document.getElementById('sortableList');
+    listContainer.innerHTML = '';
+    
+    items.forEach(function(item, index) {
+        var itemElement = document.createElement('div');
+        itemElement.className = 'list-item';
+        itemElement.draggable = true;
+        itemElement.innerHTML = 
+            '<div class="item-number">' + (index + 1) + '</div>' +
+            '<div class="item-content">' + item + '</div>' +
+            '<div class="drag-handle">≡</div>';
+        
+        // 드래그 이벤트 리스너
+        itemElement.addEventListener('dragstart', function(e) {
+            draggedElement = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        });
+        
+        itemElement.addEventListener('dragend', function(e) {
+            this.classList.remove('dragging');
+            draggedElement = null;
+        });
+        
+        itemElement.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('drag-over');
+        });
+        
+        itemElement.addEventListener('dragleave', function(e) {
+            this.classList.remove('drag-over');
+        });
+        
+        itemElement.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+            
+            if (draggedElement !== this) {
+                var draggedIndex = Array.from(listContainer.children).indexOf(draggedElement);
+                var targetIndex = Array.from(listContainer.children).indexOf(this);
+                
+                // 배열에서 항목 이동
+                var draggedItem = items.splice(draggedIndex, 1)[0];
+                items.splice(targetIndex, 0, draggedItem);
+                
+                renderList();
+            }
+        });
+        
+        listContainer.appendChild(itemElement);
+    });
+}
+
+// 삭제 영역 이벤트
+document.getElementById('deleteZone').addEventListener('dragover', function(e) {
+    e.preventDefault();
+    this.classList.add('drag-over');
+});
+
+document.getElementById('deleteZone').addEventListener('dragleave', function(e) {
+    this.classList.remove('drag-over');
+});
+
+document.getElementById('deleteZone').addEventListener('drop', function(e) {
+    e.preventDefault();
+    this.classList.remove('drag-over');
+    
+    if (draggedElement) {
+        var index = Array.from(document.getElementById('sortableList').children).indexOf(draggedElement);
+        items.splice(index, 1);
+        renderList();
+    }
+});
+
+// 새 항목 추가
+function addItem() {
+    var input = document.getElementById('newItemInput');
+    var value = input.value.trim();
+    
+    if (value) {
+        items.push(value);
+        input.value = '';
+        renderList();
+    }
+}
+
+// Enter 키로 추가
+document.getElementById('newItemInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        addItem();
+    }
+});
+
+// 초기 렌더링
+renderList();
+</script>
+</body>
+</html>

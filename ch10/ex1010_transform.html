@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!-- Canvas 사용자 정의 변환 예제 -->
+<!-- 제목: Canvas Custom Transformation -->
+<html>
+<head>
+<title> Canvas Custom Transformation </title>
+</head>
+<body>
+<canvas id="myCanvas" width="400" height="100"></canvas>
+<script type="text/javascript">
+  var canvas = document.getElementById("myCanvas");
+  var context = canvas.getContext("2d");
+
+  // original drawing
+  context.rect(0, 0, 100, 100);
+  context.fillStyle = "green";
+  context.fill();
+
+  // drawing after custom transformation
+  context.transform(2, 0, -0.2, 0.5, 150, 50);
+  context.rect(0, 0, 100, 100);
+  context.fill();
+</script>
+</body>
+</html>

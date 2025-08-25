@@ -1,0 +1,49 @@
+<!--
+연습문제 2: 조건문과 반복문
+문제: 1부터 100까지의 숫자 중에서 다음 조건을 만족하는 프로그램을 작성하세요.
+
+짝수의 합과 홀수의 합을 각각 계산
+3의 배수 개수 세기
+5와 7의 공배수 찾기
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>수학 계산 프로그램</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    var evenSum = 0;
+    var oddSum = 0;
+    var threeMultipleCount = 0;
+    var commonMultiples = [];
+    
+    for(i = 1; i <= 100; i++) {
+        // 짝수와 홀수 합 계산
+        if(i % 2 == 0) {
+            evenSum += i;
+        } else {
+            oddSum += i;
+        }
+        
+        // 3의 배수 개수 세기
+        if(i % 3 == 0) {
+            threeMultipleCount++;
+        }
+        
+        // 5와 7의 공배수 찾기
+        if(i % 5 == 0 && i % 7 == 0) {
+            commonMultiples.push(i);
+        }
+    }
+    
+    document.write("<h2>계산 결과</h2>");
+    document.write("1~100 짝수의 합: " + evenSum + "<br/>");
+    document.write("1~100 홀수의 합: " + oddSum + "<br/>");
+    document.write("3의 배수 개수: " + threeMultipleCount + "개<br/>");
+    document.write("5와 7의 공배수: " + commonMultiples.join(", ") + "<br/>");
+</script>
+</body>
+</html>

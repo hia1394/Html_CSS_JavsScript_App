@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>홈 페이지</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 5px;
+        }
+        nav a:hover {
+            background-color: #555;
+            color: yellow;
+        }
+        nav a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="page1.html" class="active">홈</a>
+        <a href="page2.html">소개</a>
+        <a href="page3.html">서비스</a>
+        <a href="page4.html">문의</a>
+    </nav>
+
+    <div class="content">
+        <h1>홈페이지에 오신 것을 환영합니다</h1>
+        <p>이 사이트는 CSS 가상 클래스를 연습하기 위한 예제 사이트입니다. 다양한 페이지를 방문하면서 링크의 상태 변화를 확인해보세요.</p>
+        <p>각 페이지를 방문하면 a:visited 가상 클래스가 적용되어 방문한 링크의 색상이 변경됩니다. 또한 링크에 마우스를 올리면 a:hover 가상 클래스가 적용되어 배경색과 글자색이 변경됩니다.</p>
+        <p>현재 페이지의 메뉴 링크에는 .active 클래스가 적용되어 있습니다. 이는 가상 클래스는 아니지만, 현재 활성화된 메뉴를 표시하기 위한 일반적인 방법입니다.</p>
+    </div>
+</body>
+</html>

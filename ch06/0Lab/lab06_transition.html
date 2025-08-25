@@ -1,0 +1,129 @@
+<!--
+연습문제 6: 전환 효과와 변환 적용하기
+문제: ex641_transition1.html과 ex642_transform.html을 참고하여 다음을 만족하는 웹 페이지를 만드세요.
+
+사진 앨범 형태의 웹 페이지 만들기
+각 사진에 hover 시 다른 변환 효과 적용하기(확대, 회전, 기울이기 등)
+변환에 전환 효과 추가하여 부드러운 애니메이션 효과 구현하기
+각 사진에 캡션 추가하기
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>나의 사진 앨범</title>
+    <style type="text/css">
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        text-align: center;
+      }
+
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .photo-container {
+        margin: 15px;
+        width: 220px;
+        height: 220px;
+        overflow: hidden;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        position: relative;
+      }
+
+      .photo {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        margin: 10px;
+        transition: transform 1s ease-in-out;
+      }
+
+      .caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px;
+        transform: translateY(100%);
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .photo-container:hover .caption {
+        transform: translateY(0);
+      }
+
+      #photo1:hover {
+        transform: scale(1.2);
+      }
+
+      #photo2:hover {
+        transform: rotate(15deg) scale(1.1);
+      }
+
+      #photo3:hover {
+        transform: skew(10deg, 5deg);
+      }
+
+      #photo4:hover {
+        transform: translate(10px, -10px) scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>나의 사진 앨범</h1>
+    <p>사진에 마우스를 올려보세요!</p>
+
+    <div class="gallery">
+      <div class="photo-container">
+        <img
+          src="images/photo1.jpg"
+          id="photo1"
+          class="photo"
+          alt="자연 풍경"
+        />
+        <div class="caption">확대 효과 - 산과 호수의 풍경</div>
+      </div>
+
+      <div class="photo-container">
+        <img
+          src="images/photo2.jpg"
+          id="photo2"
+          class="photo"
+          alt="도시 풍경"
+        />
+        <div class="caption">회전 및 확대 효과 - 서울 도시 풍경</div>
+      </div>
+
+      <div class="photo-container">
+        <img
+          src="images/photo3.jpg"
+          id="photo3"
+          class="photo"
+          alt="음식 사진"
+        />
+        <div class="caption">기울이기 효과 - 맛있는 요리</div>
+      </div>
+
+      <div class="photo-container">
+        <img
+          src="images/photo4.jpg"
+          id="photo4"
+          class="photo"
+          alt="여행 사진"
+        />
+        <div class="caption">이동 및 확대 효과 - 해외 여행 모습</div>
+      </div>
+    </div>
+
+    <p>각 사진에는 다른 변환 효과가 적용되어 있습니다.</p>
+    <p>첫 번째 사진은 확대</p>
+    <p>두 번째 사진은 회전 및 확대</p>
+    <p>세 번째 사진은 기울이기</p>
+    <p>네 번째 사진은 이동 및 확대 효과가 적용됩니다.</p>
+  </body>
+</html>

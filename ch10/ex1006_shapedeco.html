@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- 제목: Shape Decoration 2 -->
+<html>
+<head>
+<title> Shape Decoration 2 </title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="300" height="120"></canvas>
+<img id="canvasImage" />
+
+<script type="text/javascript">
+  var canvas = document.getElementById("myCanvas");
+  var context = canvas.getContext("2d");
+
+  context.beginPath();
+  context.rect(20, 20, 50, 80);
+  context.lineWidth = 20;
+  context.strokeStyle = "black";
+  context.lineJoin = "miter";
+  context.fillStyle = "grey";
+  context.stroke();
+  context.fill();
+
+  context.beginPath();
+  context.rect(110, 20, 50, 80);
+  context.strokeStyle = "black";
+  context.lineJoin = "round";
+  context.fillStyle = "pink";
+  context.stroke();
+  context.fill();
+
+  context.beginPath();
+  context.rect(200, 20, 50, 80);
+  context.strokeStyle = "black";
+  context.lineJoin = "bevel";
+  context.fillStyle = "yellow";
+  context.stroke();
+  context.fill();
+</script>
+
+
+</body>
+</html>
+
+
+

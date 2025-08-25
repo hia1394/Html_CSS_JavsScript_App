@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>비디오/오디오 제어하기</title>
+    <link rel="stylesheet" href="../res/api.css">
+</head>
+<body>
+<video id="video" width="600" height="350" controls >
+    <source 
+     src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.mp4" />
+</video>
+<div>(from: HTML5 VIDEO, HTML5Rocks)</div>
+
+<table>
+    <tr><td>Current Time</td><td id="currentTime"></td></tr>
+    <tr><td>Duration</td><td id="duration"></td></tr>
+    <tr><td>Ended</td><td id="ended"></td></tr>
+    <tr><td>Paused</td><td id="paused"></td></tr>
+</table>
+<br>
+<div>
+    <span class="button" onclick="clickPlay();">Play</span>
+    <span class="button" onclick="clickPause();">Pause</span>
+</div>
+
+<script type="text/javascript">
+var videoE = document.getElementById("video");
+
+function alertCanPlay() {
+    alert("Avalable to play multimedia content.");
+    updateState();
+}
+
+//videoE.oncanplay = alertCanPlay;
+videoE.addEventListener("canplay", alertCanPlay);
+
+//videoE.ontimeupdate = updateState;
+videoE.addEventListener("timeupdate", updateState);
+
+function clickPlay() {
+    videoE.play();
+}
+
+function clickPause() {
+    videoE.pause();
+}
+
+function updateState() {
+    document.getElementById("currentTime").innerHTML = videoE.currentTime + " sec";
+    document.getElementById("duration").innerHTML = videoE.duration + " sec";
+    document.getElementById("ended").innerHTML = videoE.ended;
+    document.getElementById("paused").innerHTML = videoE.paused;
+}
+
+updateState();
+</script>
+</body>
+</html>

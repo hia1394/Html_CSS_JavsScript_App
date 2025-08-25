@@ -1,0 +1,76 @@
+<!--
+연습문제 5: Date와 Math 객체 활용
+문제: 다음 기능을 가진 간단한 계산기 프로그램을 작성하세요.
+
+사용자로부터 두 숫자를 입력받기
+사칙연산(+, -, *, /) 결과 계산
+실행 시간 측정
+결과를 소수점 둘째 자리까지 반올림하여 출력
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>계산기 프로그램</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    // 시작 시간 기록
+    var startTime = new Date();
+    
+    // 사용자 입력
+    var num1 = parseFloat(prompt("첫 번째 숫자를 입력하세요:"));
+    var num2 = parseFloat(prompt("두 번째 숫자를 입력하세요:"));
+    var operation = prompt("연산을 선택하세요 (+, -, *, /):");
+    
+    var result;
+    var operationName;
+    
+    // 연산 수행
+    switch(operation) {
+        case "+":
+            result = num1 + num2;
+            operationName = "덧셈";
+            break;
+        case "-":
+            result = num1 - num2;
+            operationName = "뺄셈";
+            break;
+        case "*":
+            result = num1 * num2;
+            operationName = "곱셈";
+            break;
+        case "/":
+            if(num2 != 0) {
+                result = num1 / num2;
+                operationName = "나눗셈";
+            } else {
+                alert("0으로 나눌 수 없습니다!");
+                location.reload();
+            }
+            break;
+        default:
+            alert("잘못된 연산자입니다!");
+            location.reload();
+    }
+    
+    // 종료 시간 기록
+    var endTime = new Date();
+    var executionTime = endTime.getTime() - startTime.getTime();
+    
+    // 결과 출력
+    document.write("<h2>계산 결과</h2>");
+    document.write("연산: " + num1 + " " + operation + " " + num2 + "<br/>");
+    document.write("결과: " + Math.round(result * 100) / 100 + "<br/>");
+    document.write("실행 시간: " + executionTime + "ms<br/>");
+    
+    // Math 객체 활용 추가 정보
+    document.write("<h3>추가 정보</h3>");
+    document.write("절댓값: " + Math.abs(result) + "<br/>");
+    document.write("제곱근: " + Math.sqrt(Math.abs(result)).toFixed(2) + "<br/>");
+    document.write("천장값: " + Math.ceil(result) + "<br/>");
+    document.write("바닥값: " + Math.floor(result) + "<br/>");
+</script>
+</body>
+</html>

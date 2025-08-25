@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> window Object </title>
+</head>
+<body>
+
+<script  type="text/javascript" >  
+    var win;
+    function  open_window() {  
+        var url = prompt ("열어야 할 URL 주소를 입력하시오.");
+        if (url) win = window.open(url);
+    }
+</script>
+
+<button onclick="open_window();">Open a page with new window</button>
+<button onclick="win.close();">Close the window</button>
+
+</body>
+</html>

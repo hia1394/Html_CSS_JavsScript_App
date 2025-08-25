@@ -1,0 +1,46 @@
+<!--
+연습문제 5: 가상 클래스 활용하기
+과제: 링크가 있는 네비게이션 메뉴를 만드세요. 다양한 상태(일반, 호버, 방문, 활성)에 따라 링크의 스타일을 다르게 지정하세요.
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>가상 클래스 연습</title>
+    <style type="text/css">
+      nav {
+        background-color: #333;
+        padding: 10px;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 15px;
+        margin: 5px;
+      }
+      a:link {
+        color: white;
+      }
+      a:visited {
+        color: lightgray;
+      }
+      a:hover {
+        background-color: #555;
+        color: yellow;
+      }
+      a:active {
+        background-color: red;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>가상 클래스 선택자 연습</h3>
+    <nav>
+      <a href="sub/page1.html">홈</a>
+      <a href="sub/page2.html">소개</a>
+      <a href="sub/page3.html">서비스</a>
+      <a href="sub/page4.html">문의</a>
+    </nav>
+    <p>링크에 마우스를 올려보세요. 색상이 변경됩니다.</p>
+  </body>
+</html>

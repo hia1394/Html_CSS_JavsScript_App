@@ -1,0 +1,133 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Welcome to SM서점</title>
+<link rel="stylesheet" type="text/css" href="css/style-size.css"/>
+<link rel="stylesheet" type="text/css" href="css/style-layout.css"/>
+<link rel="stylesheet" type="text/css" href="css/style-presentation.css"/>
+</head>
+<body>
+<div class="wrap">
+<header>
+    <a id="logo" href="main.html"> SM Bookstore </a>
+    <span class="right" style="padding: 30px 10px;">
+        <a href="login.html" target="display_area" id="loginLink">로그인</a> |
+        <a href="signup.html" target="display_area" id="signupLink">회원가입</a>
+    </span>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="domestic_books.html" target="display_area">국내도서</a></li>
+        <li><a href="foreign_books.html" target="display_area">해외번역도서</a></li>
+        <li><a href="music.html" target="display_area">음반/DVD</a></li>
+        <li class="right"><a href="order.html" target="display_area">주문하기</a></li>
+    </ul>
+</nav>
+
+<hr/>
+
+<article class="left">
+    <iframe name="display_area" src="images/books.jpg" seamless="true"
+            width="600px" height="500px"></iframe>
+</article>
+
+<aside class="right">
+    <button id="save_favorite" style="width:85px" onclick="openFavoriteWindow()">관심도서 등록</button><br/>
+    <button id="view_favorite" style="width:85px" onclick="viewFavorites()">관심도서 보기</button><br/>
+    <button id="memo" style="width:85px" onclick="openMemo()">메모하기</button><br/>
+    <button id="location" style="width:85px" onclick="showLocation()">현재위치</button>
+</aside>
+
+<hr/>
+
+<footer>  
+   <div id="copyright">
+       Copyright (c) 2013 SM Bookstore Inc. All rights reserved
+   </div>
+   <div id="SNS">
+       <a href="http://facebook.com" target="_blank">
+           <img src="images/facebook.gif" height="32" alt="Facebook">
+       </a>
+       <a href="http://twitter.com" target="_blank">
+           <img src="images/twitter.gif" height="32" alt="Twitter">
+       </a>
+       <a href="http://plus.google.com" target="_blank">
+           <img src="images/googleplus-icon.png" height="32" alt="Google Plus">
+       </a>
+    </div>
+</footer>
+</div>
+
+<script type="text/javascript">
+    // 로그인 상태 확인
+    function checkLoginStatus() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        const username = localStorage.getItem('username');
+        
+        if (isLoggedIn && username) {
+            updateLoginStatus(username);
+        }
+    }
+    
+    // 로그인 상태 업데이트
+    function updateLoginStatus(username) {
+        const loginLink = document.getElementById('loginLink');
+        loginLink.textContent = `${username}님`;
+        loginLink.href = '#';
+        loginLink.onclick = function() {
+            if (confirm('로그아웃 하시겠습니까?')) {
+                logout();
+            }
+            return false;
+        };
+    }
+    
+    // 로그아웃
+    function logout() {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('username');
+        localStorage.removeItem('currentUser');
+        
+        const loginLink = document.getElementById('loginLink');
+        loginLink.textContent = '로그인';
+        loginLink.href = 'login.html';
+        loginLink.onclick = null;
+        
+        document.querySelector('iframe[name="display_area"]').src = 'images/books.jpg';
+        alert('로그아웃 되었습니다.');
+    }
+    
+    // 메시지 수신 (iframe에서 로그인 완료 시)
+    window.addEventListener('message', function(event) {
+        if (event.data.type === 'login') {
+            updateLoginStatus(event.data.username);
+        }
+    });
+    
+    // 관심도서 등록
+    function openFavoriteWindow() {
+        document.querySelector('iframe[name="display_area"]').src = 'save_favorite.html';
+    }
+    
+    // 관심도서 보기
+    function viewFavorites() {
+        document.querySelector('iframe[name="display_area"]').src = 'view_favorite.html';
+    }
+    
+    // 메모 기능
+    function openMemo() {
+        document.querySelector('iframe[name="display_area"]').src = 'memo_canvas.html';
+    }
+    
+    // 현재 위치 표시
+    function showLocation() {
+        document.querySelector('iframe[name="display_area"]').src = 'show_map.html';
+    }
+    
+    // 페이지 로드 시 로그인 상태 확인
+    checkLoginStatus();
+</script>
+</body>
+</html>

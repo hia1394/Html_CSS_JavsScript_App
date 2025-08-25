@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> Event Handling</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    function add() {
+        var a = document.getElementById("op1").value;
+        var b = document.getElementById("op2").value;
+        document.getElementById("result").value = parseInt(a) + parseInt(b);
+    }
+</script>
+
+<form>
+    <input id="op1" type="text" size="2"/>+
+    <input id="op2" type="text" size="2"/>
+    <input type="button" value="=" onclick="add();"/>
+    <input id="result" type="text" size="2"/>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!--
+연습문제 3: 드롭다운 메뉴와 fieldset 사용하기
+문제: 웹사이트 회원가입 폼을 만드세요. 이름, 이메일, 비밀번호, 비밀번호 확인, 연령대(드롭다운 메뉴 사용)를 입력받아야 합니다. 
+폼 요소들을 fieldset과 legend를 사용하여 논리적으로 그룹화하세요.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>회원가입 폼</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h2>회원가입</h2>
+  <form method="get" action="../all_result.html">
+    <fieldset>
+      <legend>기본 정보</legend>
+      <p>
+        <label for="name">이름:</label><br>
+        <input type="text" id="name" name="name" required>
+      </p>
+      <p>
+        <label for="email">이메일:</label><br>
+        <input type="email" id="email" name="email" required>
+      </p>
+    </fieldset>
+    
+    <fieldset>
+      <legend>계정 보안</legend>
+      <p>
+        <label for="password">비밀번호:</label><br>
+        <input type="password" id="password" name="password" required>
+      </p>
+      <p>
+        <label for="confirm_password">비밀번호 확인:</label><br>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+      </p>
+    </fieldset>
+    
+    <fieldset>
+      <legend>추가 정보</legend>
+      <p>
+        <label for="age_group">연령대:</label><br>
+        <select id="age_group" name="age_group">
+          <option value="">선택하세요</option>
+          <option value="under20">20세 미만</option>
+          <option value="20s">20-29세</option>
+          <option value="30s">30-39세</option>
+          <option value="40s">40-49세</option>
+          <option value="50s">50-59세</option>
+          <option value="60plus">60세 이상</option>
+        </select>
+      </p>
+    </fieldset>
+    
+    <p>
+      <input type="submit" value="가입하기">
+      <input type="reset" value="초기화">
+    </p>
+  </form>
+</body>
+</html>

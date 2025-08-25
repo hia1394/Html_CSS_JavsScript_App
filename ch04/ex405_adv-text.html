@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>텍스트 라벨 예제</title>
+  </head>
+  <body>
+    <form method="get" action="all_result.html">
+      <p>Email : <input type="email" name="email" /><br /></p>
+      <p>URL : <input type="url" name="url" value="http://" /><br /></p>
+      <p>
+        Tel :
+        <input
+          type="tel"
+          name="tel"
+          placeholder="00*-000*-0000"
+          pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}"
+        />
+        <br />
+      </p>
+      <p>Search : <input type="search" name="search" placeholder="Search..." /> <br /></p>
+      <hr />
+      <input type="submit" value="전송하기" /> &nbsp;
+      <input type="reset" value="초기화" /> &nbsp;
+    </form>
+  </body>
+</html>

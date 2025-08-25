@@ -1,0 +1,65 @@
+<!--
+연습문제 7: 배경 속성
+과제: 다양한 배경 속성(색상, 이미지, 위치, 반복)을 보여주는 요소가 있는 웹페이지를 만드세요.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .box {
+            width: 300px;
+            height: 200px;
+            border: 2px solid #333;
+            margin-bottom: 30px;
+            padding: 15px;
+            color: white;
+            text-shadow: 1px 1px 2px black;
+        }
+        
+        /* 1. 기본 반복 (repeat) */
+        .repeat {
+            background-image: url('https://picsum.photos/100/50');
+            background-repeat: repeat;
+        }
+        
+        /* 2. 가로 반복 (repeat-x) */
+        .repeat-x {
+            background-image: url('https://picsum.photos/100/100');
+            background-repeat: repeat-x;
+        }
+        
+        /* 3. 세로 반복 (repeat-y) */
+        .repeat-y {
+            background-image: url('https://picsum.photos/100/100');
+            background-repeat: repeat-y;
+        }
+        
+        /* 4. 반복 없음 (no-repeat) */
+        .no-repeat {
+            background-image: url('https://picsum.photos/300/200');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* 5. 고정 배경 (fixed) */
+        .fixed {
+            background-image: url('https://picsum.photos/800/600');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box repeat">background-repeat: repeat (기본값 - 가로, 세로 모두 반복)</div>
+    <div class="box repeat-x">background-repeat: repeat-x (가로 방향으로만 반복)</div>
+    <div class="box repeat-y">background-repeat: repeat-y (세로 방향으로만 반복)</div>
+    <div class="box no-repeat">background-repeat: no-repeat (반복 없음)</div>
+    <div class="box fixed">background-attachment: fixed (스크롤해도 배경 고정)</div>
+</body>
+</html>

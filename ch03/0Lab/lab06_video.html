@@ -1,0 +1,45 @@
+<!--
+비디오 요소 사용하기 (ex307_video1.html, ex308_video2.html 기반)
+문제: 다양한 옵션으로 비디오를 삽입하고 포스터 이미지를 설정하세요.
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>비디오 요소 연습</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <h2>HTML5 비디오 플레이어</h2>
+
+    <h3>기본 비디오 플레이어</h3>
+    <video width="400" height="300" controls>
+      <source src="video/mypuppy.mp4" type="video/mp4" />
+      <source src="video/mypuppy.webm" type="video/webm" />
+      <source src="video/mypuppy.ogg" type="video/ogg" />
+      브라우저가 비디오 요소를 지원하지 않거나 비디오 형식을 재생할 수 없습니다.
+    </video>
+
+    <h3>포스터 이미지가 있는 비디오</h3>
+    <video
+      width="400"
+      height="300"
+      controls
+      poster="images/video_thumbnail.jpg"
+      preload="metadata"
+    >
+      <source src="video/mypuppy.mp4" type="video/mp4" />
+      브라우저가 비디오 요소를 지원하지 않습니다.
+    </video>
+
+    <h3>자동 재생 및 반복 비디오</h3>
+    <video width="400" height="300" controls autoplay muted loop>
+      <source src="video/mypuppy.mp4" type="video/mp4" />
+      브라우저가 비디오 요소를 지원하지 않습니다.
+    </video>
+
+    <p>
+      참고: 자동 재생은 대부분의 브라우저에서 사용자 경험을 위해 음소거
+      상태에서만 작동합니다.
+    </p>
+  </body>
+</html>

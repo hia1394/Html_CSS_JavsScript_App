@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>로컬스토리지 사용하기</title>
+    <link rel="stylesheet" href="../res/api.css">
+</head>
+<body onload="showAll()">
+키: <input id="k" type="text">
+값: <input id="v" type="text">
+<span class="button" onclick="saveItem()">저장</span>
+<span class="button" onclick="removeItem()">삭제</span>
+<hr>
+<select id="entries" size=5 onchange="onEntrySelected()"> </select>
+
+<script type="text/javascript">
+    var MyStorage = window.localStorage;
+
+    if (!MyStorage) {
+        alert("로컬스토리지를 지원하지 않습니다.");
+    }
+
+    var key = document.getElementById("k");
+    var value = document.getElementById("v");
+    var entries = document.getElementById("entries");
+
+    // 스토리지 내용 모두 표시
+    function showAll() {
+        // 목록 clear
+        entries.innerHTML = "";
+
+        // 루프, 스토리지 내용 확인
+        for ( var i = 0; i < MyStorage.length ; i++ ) {
+            var k = MyStorage.key(i);
+            entries.options[entries.options.length] = new Option(k + ":" + MyStorage[k], k);
+        }
+    }
+
+    // 스토리지에 저장
+    function saveItem() {
+        MyStorage.setItem(key.value, value.value);
+        showAll();
+    }
+
+    // 스토리지로부터 값을 삭제
+    function removeItem() {
+        MyStorage.removeItem(key.value);
+        showAll();
+    }
+
+    // 선택된 엔트리를 텍스트 필드에 표시
+    function onEntrySelected() {
+        var selectedOption = entries.options[entries.selectedIndex];
+        key.value = selectedOption.value;
+        value.value = MyStorage.getItem(selectedOption.value);
+    }
+</script>
+</body>
+</html>

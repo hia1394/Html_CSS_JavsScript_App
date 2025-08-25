@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>추가된 입력 요소 예제</title>
+  </head>
+  <body>
+    <form method="get" action="all_result.html">
+      <h3>도서 구입 요청</h3>
+      참가국 : <input type="text" size="12" name="country" list="country" />
+      <datalist id="country">
+        <option value="스페인" />
+        <option value="영국" />
+        <option value="독일" />
+      </datalist>
+      <p>
+        금액 :
+        <input
+          type="number"
+          id="price"
+          name="price"
+          size="8"
+          min="0"
+          step="100"
+          value="0"
+          oninput="calculateTotal()"
+        />
+        원 X
+        <input 
+          type="number" 
+          id="num" 
+          name="num" 
+          size="5" 
+          step="1" 
+          min="0" 
+          value="0" 
+          oninput="calculateTotal()"
+        />
+        권 =
+        <output id="total" name="total">0원</output>
+      </p>
+    
+      <p>
+        <!-- 교육 목적으로 유지한 폐기된 태그 -->
+        암호화 <keygen name="key" /> (참고: 폐기된 HTML5 태그)
+      </p>
+      <p>
+        암호화 <button type="button" onclick="generateKey()">보안 키 생성</button>
+        <input type="hidden" name="securityKey" id="securityKey" value="">
+      </p>  
+        <hr />
+        <input type="submit" value="구입" />
+      </p>
+    
+      <script>
+        function calculateTotal() {
+          const price = document.getElementById('price').valueAsNumber || 0;
+          const num = document.getElementById('num').valueAsNumber || 0;
+          const total = price * num;
+          document.getElementById('total').value = total + '원';
+        }
+        function generateKey() {
+          // 가상의 키 생성 (실제 암호화에는 더 복잡한 로직 필요)
+          const randomKey = Math.random().toString(36).substring(2, 15);
+          document.getElementById('securityKey').value = randomKey;
+          alert('보안 키가 생성되었습니다: ' + randomKey);
+        }
+      </script>
+    </form>
+  </body>
+</html>

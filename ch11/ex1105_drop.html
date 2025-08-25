@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>요소 놓기</title>
+    <link rel="stylesheet" href="../res/api.css">
+</head>
+<body>
+<div id="src">
+    <img id="semantics" src="../res/HTML5_Semantics_64.png" draggable="false">
+    <img id="multimedia" src="../res/HTML5_Multimedia_64.png" draggable="true">
+    <img id="styling" src="../res/HTML5_Styling_64.png" draggable="true">
+</div>
+<br>
+<div id="target">
+    <span id="drop" class="button">Drop here</span>
+</div>
+<br>
+<table>
+    <tr><td>Drag Source Id</td><td id="srcId"></td></tr>
+    <tr><td>Drag Target Id</td><td id="targetId"></td></tr>
+    <tr><td>Output</td><td id="o"></td></tr>
+</table>
+
+<script type="text/javascript">
+var src = document.getElementById("src");
+var target = document.getElementById("target");
+var isDraggingOver;
+var srcId, targetId;
+
+src.ondragstart = function (e) {
+    srcId = e.target.id;
+    document.getElementById("srcId").innerHTML = e.target.id;
+}
+
+target.ondragenter = function (e) {
+    targetId = e.target.id;
+    document.getElementById("targetId").innerHTML = targetId;
+    document.getElementById("o").innerHTML = "dragenter: " + targetId;
+    isDraggingOver = false;
+}
+
+target.ondragover = function (e) {
+    e.preventDefault();
+
+    if (isDraggingOver == false) {
+        document.getElementById("o").innerHTML += "<br>dragover: " + targetId;
+        isDraggingOver = true;
+    }
+}
+
+target.ondragleave = function (e) {
+    document.getElementById("o").innerHTML += "<br>dragleave: " + targetId;
+}
+
+target.ondrop = function (e) {
+    e.preventDefault();
+
+    document.getElementById("o").innerHTML += "<br>drop: " + targetId;
+}
+</script>
+</body>
+</html>

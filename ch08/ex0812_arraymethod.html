@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- JavaScript 배열 객체의 기능을 보여주기 위한 예제 -->
+<html>
+<head>
+<title> JavaScript Arrays </title>
+
+<script type="text/javascript">
+  function print_array(a, name) {
+    document.write("Size of array: " + a.length + "<br/>");
+    for(i=0;i<a.length;i++) {
+      if (typeof(a[i]) == "string")
+        document.write(name + "[" + i + "]: \"" + a[i] + "\" <br/>");
+      else
+        document.write(name + "[" + i + "]: " + a[i] + " <br/>");
+    }
+  }
+</script>
+
+</head>
+<body>
+
+<script type="text/javascript">
+  var arr = new Array("zero", "one", 2, "3" );
+
+  document.write("<br/> Original Array: <br/>");
+  print_array(arr, "arr");
+
+  arr.reverse();
+  document.write("<br/> After reverse: <br/>");
+  print_array(arr, "arr");
+
+  var str = arr.join(" = ");
+  document.write("<br/> After join: <br/>");
+  document.write("str: \"" + str + "\"<br/>");
+
+  arr.sort();
+  document.write("<br/> After sort: <br/>");
+  print_array(arr, "arr");
+
+  var new_arr = arr.concat(4, "five", 6);
+  document.write("<br/> After concatenation: <br/>");
+  print_array(new_arr, "new_arr");
+
+  var sliced_arr = arr.slice(2, 6);  
+  document.write("<br/> After slice: <br/>");
+  print_array(sliced_arr, "sliced_arr");
+</script>
+
+</body>
+</html>

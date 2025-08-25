@@ -1,0 +1,230 @@
+<!--
+연습문제 3: 이미지 갤러리
+문제: 이미지 갤러리를 만드세요.
+
+여러 이미지의 썸네일 표시
+썸네일 클릭 시 큰 이미지로 전환
+이미지 숨기기/보이기 기능
+슬라이드쇼 기능
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>이미지 갤러리</title>
+<style>
+    .gallery-container {
+        max-width: 800px;
+        margin: 20px auto;
+        text-align: center;
+    }
+    
+    .main-image {
+        width: 500px;
+        height: 300px;
+        object-fit: cover;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .thumbnail-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .thumbnail {
+        width: 80px;
+        height: 60px;
+        object-fit: cover;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: border-color 0.3s;
+    }
+    
+    .thumbnail:hover {
+        border-color: #007bff;
+    }
+    
+    .thumbnail.active {
+        border-color: #007bff;
+        border-width: 3px;
+    }
+    
+    .controls {
+        margin: 20px 0;
+    }
+    
+    .control-btn {
+        padding: 10px 20px;
+        margin: 0 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    .control-btn:hover {
+        background-color: #0056b3;
+    }
+    
+    .slideshow-controls {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="gallery-container">
+    <h1>이미지 갤러리</h1>
+    
+    <img id="mainImage" class="main-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="메인 이미지">
+    
+    <div class="thumbnail-container" id="thumbnailContainer">
+        <!-- 썸네일들이 여기에 동적으로 추가됩니다 -->
+    </div>
+    
+    <div class="controls">
+        <button class="control-btn" onclick="previousImage()">◀ 이전</button>
+        <button class="control-btn" onclick="nextImage()">다음 ▶</button>
+        <button class="control-btn" onclick="toggleSlideshow()" id="slideshowBtn">슬라이드쇼 시작</button>
+    </div>
+    
+    <div class="slideshow-controls">
+        <button class="control-btn" onclick="hideCurrentImage()">현재 이미지 숨기기</button>
+        <button class="control-btn" onclick="showAllImages()">모든 이미지 보이기</button>
+    </div>
+</div>
+
+<script>
+// 이미지 데이터
+var images = [
+    { src: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb', hidden: false }, // 산과 호수
+    { src: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470', hidden: false }, // 호숫가
+    { src: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05', hidden: false }, // 안개 낀 숲
+    { src: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d', hidden: false }, // 자연 풍경
+    { src: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e', hidden: false }  // 바위 해안
+];
+
+var currentIndex = 0;
+var slideshowInterval = null;
+
+// 초기 썸네일 생성
+function initializeGallery() {
+    var container = document.getElementById('thumbnailContainer');
+    
+    images.forEach(function(image, index) {
+        var thumbnail = document.createElement('img');
+        thumbnail.className = 'thumbnail';
+        thumbnail.src = image.src;
+        thumbnail.onclick = function() { showImage(index); };
+        container.appendChild(thumbnail);
+    });
+    
+    updateDisplay();
+}
+
+// 이미지 표시
+function showImage(index) {
+    currentIndex = index;
+    updateDisplay();
+}
+
+// 화면 업데이트
+function updateDisplay() {
+    var mainImage = document.getElementById('mainImage');
+    var thumbnails = document.querySelectorAll('.thumbnail');
+    
+    // 숨겨진 이미지가 아닌 것 중에서 찾기
+    while (images[currentIndex].hidden && images.some(img => !img.hidden)) {
+        currentIndex = (currentIndex + 1) % images.length;
+    }
+    
+    mainImage.src = images[currentIndex].src;
+    
+    // 썸네일 활성화 표시
+    thumbnails.forEach(function(thumb, index) {
+        if (index === currentIndex) {
+            thumb.classList.add('active');
+        } else {
+            thumb.classList.remove('active');
+        }
+        
+        // 숨겨진 이미지는 투명하게
+        if (images[index].hidden) {
+            thumb.style.opacity = '0.3';
+        } else {
+            thumb.style.opacity = '1';
+        }
+    });
+}
+
+// 이전 이미지
+function previousImage() {
+    var visibleImages = images.map((img, idx) => ({ img, idx })).filter(item => !item.img.hidden);
+    if (visibleImages.length === 0) return;
+    
+    var currentPos = visibleImages.findIndex(item => item.idx === currentIndex);
+    currentPos = (currentPos - 1 + visibleImages.length) % visibleImages.length;
+    currentIndex = visibleImages[currentPos].idx;
+    updateDisplay();
+}
+
+// 다음 이미지
+function nextImage() {
+    var visibleImages = images.map((img, idx) => ({ img, idx })).filter(item => !item.img.hidden);
+    if (visibleImages.length === 0) return;
+    
+    var currentPos = visibleImages.findIndex(item => item.idx === currentIndex);
+    currentPos = (currentPos + 1) % visibleImages.length;
+    currentIndex = visibleImages[currentPos].idx;
+    updateDisplay();
+}
+
+// 슬라이드쇼 토글
+function toggleSlideshow() {
+    var btn = document.getElementById('slideshowBtn');
+    
+    if (slideshowInterval) {
+        clearInterval(slideshowInterval);
+        slideshowInterval = null;
+        btn.textContent = '슬라이드쇼 시작';
+    } else {
+        slideshowInterval = setInterval(nextImage, 2000);
+        btn.textContent = '슬라이드쇼 중지';
+    }
+}
+
+// 현재 이미지 숨기기
+function hideCurrentImage() {
+    images[currentIndex].hidden = true;
+    
+    // 다른 보이는 이미지로 이동
+    var visibleImages = images.some(img => !img.hidden);
+    if (visibleImages) {
+        nextImage();
+    } else {
+        // 모든 이미지가 숨겨진 경우
+        document.getElementById('mainImage').src = 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80';
+    }
+    
+    updateDisplay();
+}
+
+// 모든 이미지 보이기
+function showAllImages() {
+    images.forEach(function(image) {
+        image.hidden = false;
+    });
+    updateDisplay();
+}
+
+// 초기화
+initializeGallery();
+</script>
+</body>
+</html>

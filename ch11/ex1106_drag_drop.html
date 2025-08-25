@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>끌어다 놓기 처리하기</title>
+    <link rel="stylesheet" href="../res/api.css">
+</head>
+<body>
+<div id="src">
+    <img id="semantics" src="../res/HTML5_Semantics_64.png" draggable="true">
+    <img id="multimedia" src="../res/HTML5_Multimedia_64.png" draggable="true">
+    <img id="styling" src="../res/HTML5_Styling_64.png" draggable="true">
+</div>
+<br>
+<div id="target">
+    <span id="dropzone" class="button">Drop here</span>
+</div>
+<br>
+
+<script type="text/javascript">
+var srcId;
+
+src.ondragstart = function (e) {
+    srcId = e.target.id;
+}
+
+target.ondragover = function (e) {
+    e.preventDefault();
+}
+
+target.ondrop = function (e) {
+    e.preventDefault();
+
+    var newE = document.getElementById(srcId).cloneNode();
+
+    var target = document.getElementById("target");
+    var dropzone = document.getElementById("dropzone");
+    target.innerHTML = "";
+    target.appendChild(dropzone)
+    target.appendChild(document.createElement("br"));
+    target.appendChild(newE);
+}
+</script>
+</body>
+</html>

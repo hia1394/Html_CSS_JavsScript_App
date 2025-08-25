@@ -1,0 +1,41 @@
+<!--
+연습문제 2: 라디오 버튼과 체크박스 사용하기
+문제: 사용자의 성별(라디오 버튼)과 관심사(체크박스, 최소 3개 이상)를 입력받는 폼을 작성하세요.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>라디오 버튼과 체크박스</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h2>프로필 정보</h2>
+  <form method="get" action="../all_result.html">
+    <p>
+      <strong>성별:</strong><br>
+      <input type="radio" id="male" name="gender" value="male">
+      <label for="male">남성</label>
+      <input type="radio" id="female" name="gender" value="female">
+      <label for="female">여성</label>
+      <input type="radio" id="other" name="gender" value="other">
+      <label for="other">기타</label>
+    </p>
+    <p>
+      <strong>관심사 (여러 개 선택 가능):</strong><br>
+      <input type="checkbox" id="tech" name="interests" value="tech">
+      <label for="tech">기술</label>
+      <input type="checkbox" id="art" name="interests" value="art">
+      <label for="art">예술</label>
+      <input type="checkbox" id="sports" name="interests" value="sports">
+      <label for="sports">스포츠</label>
+      <input type="checkbox" id="travel" name="interests" value="travel">
+      <label for="travel">여행</label>
+      <input type="checkbox" id="cooking" name="interests" value="cooking">
+      <label for="cooking">요리</label>
+    </p>
+    <p>
+      <input type="submit" value="제출">
+    </p>
+  </form>
+</body>
+</html>

@@ -1,0 +1,202 @@
+/* 기본 스타일 */
+body { 
+    background-color: gray; 
+    font-size: 0.75em; 
+    line-height: 1.2em; 
+    margin: 0; 
+    padding: 0;
+}
+
+img { border: none; }
+
+/* 래퍼 및 레이아웃 */
+.wrap { 
+    width: 700px; 
+    min-height: 600px; 
+    text-align: left; 
+    background-color: white; 
+    margin: 0 auto;
+}
+
+/* 헤더 */
+header { 
+    height: 80px; 
+    vertical-align: middle; 
+}
+
+#logo { 
+    color: darkblue; 
+    font-size: 48px; 
+    float: left; 
+    vertical-align: middle; 
+    margin: 30px 0 0 20px; 
+}
+
+.left { float: left; }
+.right { float: right; }
+.clear { clear: both; }
+
+/* 네비게이션 */
+nav { 
+    background-color: aqua; 
+    width: 700px; 
+    margin: 0 0 20px 0; 
+    float: left; 
+}
+
+nav ul { 
+    list-style: none; 
+    font-family: Verdana, Geneva, sans-serif; 
+    font-size: 14px;
+    font-weight: bold; 
+    color: #ff0099;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li { 
+    float: left;    
+    margin: 0 5px; 
+    list-style: none; 
+}
+
+nav a { 
+    text-decoration: none; 
+    color: #000000; 
+    border-style: hidden hidden solid hidden;
+    border-color: transparent;
+    display: block; 
+    padding: 5px; 
+    height: 20px;
+}
+
+nav a:hover { 
+    color: #2b4480;    
+    border-color: blue; 
+}
+
+/* 푸터 */
+footer { 
+    height: 70px; 
+    clear: both;
+}
+
+footer #copyright { 
+    font-family: consolas; 
+    margin: 20px 0 0 10px; 
+    float: left;
+}
+
+footer #SNS { 
+    margin: 10px 20px 0 0; 
+    float: right;
+}
+
+footer #SNS a { text-decoration: none; }
+
+/* 폼 스타일 */
+#login, #signup, #order { 
+    background-color: #d8d8d8; 
+    margin: 30px;
+}
+
+#login fieldset span, #signup fieldset span { 
+    display: inline-block; 
+    vertical-align: middle;
+}
+
+#login fieldset span { width: 80px; }
+#signup fieldset span { width: 90px; }
+
+input { color: blue; }
+
+/* 주문 폼 */
+#order .head { 
+    font-size: 16px; 
+    font-weight: bolder; 
+}
+
+#order table { 
+    border-collapse: collapse; 
+}
+
+#order table td, th { 
+    width: 150px; 
+    height: 30px; 
+    text-align: center; 
+    border: 1px solid silver;
+}
+
+#order table input { 
+    background-color: transparent; 
+}
+
+/* 도서 목록 */
+.booklist { 
+    font-family: arial; 
+    background-color: #f0f0f0;
+    background-image: url(./images/cloud.jpg); 
+    background-repeat: no-repeat;
+    background-position: 0px 0px;	
+    border: solid 3px steelblue; 
+    border-radius: 10px;
+    height: 462px; 
+    margin: 10px; 
+    padding: 5px;
+}
+
+.aerialview { 
+    background-image: url(./images/aerialview.jpg); 
+}
+
+.booklist .head { 
+    font-size: 16px; 
+    font-weight: bolder; 
+    margin: 15px 0 0 10px;
+}
+
+.booklist ul { 
+    margin: 0;
+    padding: 0;
+}
+
+.booklist ul li { 
+    font-size: 12px; 
+    list-style-type: none; 
+    float: left; 
+    margin: 5px 5px 10px 5px; 
+    width: 150px; 
+    height: 180px;
+}
+
+.booklist ul li img { 
+    border: solid; 
+    border-color: lightgray; 
+    border-width: 1px; 
+    height: 120px;
+}
+
+/* 음악 리스트 */
+.musiclist ul li { 
+    font-size: 12px; 
+    font-weight: bold;
+    text-shadow: 0.2em 0.2em 0.2em white;
+    width: 530px;
+}
+
+.booklist ul li audio, video { 
+    width: 330px; 
+}
+
+.booklist ul li video { 
+    height: 120px; 
+}
+
+/* 사이드바 */
+aside { 
+    margin: 5px; 
+}
+
+article { 
+    margin: 5px 0 10px 0; 
+}

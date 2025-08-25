@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>파일 정보 가져오기</title>
+    <link rel="stylesheet" href="../res/api.css">
+</head>
+<body>
+<input class="button" type="file" id="files" name="files[]" multiple />
+<br>
+<table>
+    <tr><td id="list"></td></tr>
+</table>
+
+<script>
+function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+		var lastDate = f.lastModifiedDate;
+	
+        output.push(
+            '<li><strong>', escape(f.name), 
+            '</strong> (', f.type || 'n/a', ') - ', 
+            f.size, ' bytes, last modified: ',
+            lastDate ? lastDate.toLocaleDateString() : 'n/a',
+            '</li>');
+    }
+    var listE = document.getElementById('list')
+    listE.innerHTML = '<ul>' + output.join('') + '</ul>';
+}
+
+var filesE = document.getElementById('files')
+
+// fileE.onchange = handleFileSelect;
+filesE.addEventListener('change', handleFileSelect, false);
+</script>
+</body>
+</html>

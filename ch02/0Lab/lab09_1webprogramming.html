@@ -1,0 +1,280 @@
+<!--
+종합 실습
+    연습문제 9: 제공된 모든 예제의 요소를 종합하여 간단한 웹 페이지를 작성하시오. 페이지는 "웹 프로그래밍 강좌"를 소개하는 내용이며, 다음 요소를 포함해야 합니다:
+
+    문서 구조화 태그 사용
+    제목과 단락
+    강조 텍스트
+    목록(순서 있는 목록, 순서 없는 목록)
+    표
+    div와 span을 이용한 스타일 적용
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>웹 프로그래밍 강좌</title>
+  <style>
+    /* ========== 전체 페이지 기본 설정 ========== */
+    body {
+      font-family: Arial, sans-serif;  /* 페이지 전체 폰트를 Arial로 설정, 없으면 sans-serif 계열 사용 */
+      line-height: 1.6;                /* 줄 간격을 글자 크기의 1.6배로 설정 (가독성 향상) */
+      margin: 0;                       /* body의 기본 외부 여백을 제거 */
+      padding: 0;                      /* body의 기본 내부 여백을 제거 */
+    }
+    
+    /* ========== 헤더와 푸터 공통 스타일 ========== */
+    header, footer {
+      background-color: #333;          /* 헤더와 푸터 배경색을 진한 회색(#333333)으로 설정 */
+      color: white;                    /* 헤더와 푸터 텍스트 색상을 흰색으로 설정 */
+      padding: 10px;                     /* 헤더와 푸터 내부에 10픽셀 여백 추가 */
+      text-align: center;                /* 헤더와 푸터 텍스트를 가운데 정렬 */
+    }
+    
+    /* ========== 네비게이션 영역 스타일 ========== */
+    nav {
+      background-color: #f4f4f4;       /* 네비게이션 배경색을 연한 회색으로 설정 */
+      padding: 10px;                     /* 네비게이션 내부에 10픽셀 여백 추가 */
+    }
+    
+    /* ========== 네비게이션 목록 스타일 ========== */
+    nav ul {
+      list-style-type: none;           /* 목록 앞의 불릿 포인트(•) 제거 */
+      padding: 0;                      /* ul 요소의 기본 패딩 제거 */
+      display: flex;                   /* ul을 플렉스 컨테이너로 설정하여 자식 요소들을 가로 배치 */
+      justify-content: center;         /* 플렉스 아이템들(li)을 가로축 중앙에 배치 */
+    }
+    
+    /* ========== 네비게이션 목록 아이템 스타일 ========== */
+    nav li {
+      margin: 0 15px;                  /* 각 메뉴 아이템의 좌우에 15픽셀씩 여백 추가 */
+    }
+    
+    /* ========== 메인 콘텐츠 영역 레이아웃 ========== */
+    main {
+      display: flex;                   /* main을 플렉스 컨테이너로 설정하여 section과 aside를 가로 배치 */
+      padding: 20px;                   /* main 내부에 20픽셀 여백 추가 */
+    }
+    
+    /* ========== 메인 섹션 스타일 ========== */
+    section {
+      flex: 3;                         /* 플렉스 비율을 3으로 설정 (aside의 3배 너비 차지) */
+      padding-right: 20px;             /* section 오른쪽에 20픽셀 여백 추가 (aside와의 간격) */
+    }
+    
+    /* ========== 사이드바 스타일 ========== */
+    aside {
+      flex: 1;                         /* 플렉스 비율을 1로 설정 (section의 1/3 너비 차지) */
+      background-color: #f4f4f4;     /* 사이드바 배경색을 연한 회색으로 설정 */
+      padding: 15px;                   /* 사이드바 내부에 15픽셀 여백 추가 */
+    }
+    
+    /* ========== 강의 정보 박스 스타일 ========== */
+    .course {
+      background-color: #f9f9f9;       /* 강의 박스 배경색을 매우 연한 회색으로 설정 */
+      border-left: 5px solid #333;     /* 강의 박스 왼쪽에 5픽셀 두께의 진한 회색 테두리 추가 */
+      padding: 10px;                     /* 강의 박스 내부에 10픽셀 여백 추가 */
+      margin-bottom: 15px;               /* 각 강의 박스 아래쪽에 15픽셀 여백 추가 */
+    }
+    
+    /* ========== 하이라이트 텍스트 스타일 ========== */
+    .highlight {
+      background-color: yellow;        /* highlight 클래스 요소의 배경을 노란색으로 설정 (형광펜 효과) */
+    }
+    
+    /* ========== 중요 텍스트 스타일 ========== */
+    .important {
+      color: red;                      /* important 클래스 텍스트를 빨간색으로 설정 */
+      font-weight: bold;                 /* important 클래스 텍스트를 굵은 글씨로 설정 */
+    }
+    
+    /* ========== 테이블 기본 스타일 ========== */
+    table {
+      width: 100%;                       /* 테이블 너비를 부모 요소의 100%로 설정 */
+      border-collapse: collapse;         /* 테이블 셀 간의 경계선을 합쳐서 이중선 제거 */
+      margin: 15px 0;                    /* 테이블 위아래에 15픽셀 여백 추가 */
+    }
+    
+    /* ========== 테이블 셀 공통 스타일 ========== */
+    th, td {
+      border: 1px solid #ddd;          /* 모든 테이블 셀에 1픽셀 두께의 연한 회색 테두리 추가 */
+      padding: 8px;                      /* 모든 테이블 셀 내부에 8픽셀 여백 추가 */
+      text-align: left;                  /* 모든 테이블 셀의 텍스트를 왼쪽 정렬 */
+    }
+    
+    /* ========== 테이블 헤더 스타일 ========== */
+    th {
+      background-color: #333;          /* 테이블 헤더 배경색을 진한 회색으로 설정 */
+      color: white;                    /* 테이블 헤더 텍스트를 흰색으로 설정 */
+    }
+    
+    /* ========== 테이블 행 스트라이프 효과 ========== */
+    tr:nth-child(even) {                 /* 테이블의 짝수 번째 행에만 적용 (2, 4, 6번째 행...) */
+      background-color: #f2f2f2;       /* 짝수 행의 배경색을 연한 회색으로 설정 (zebra stripe 효과) */
+    }
+/* 
+========== 레이아웃 구조 설명 ==========
+이 CSS는 다음과 같은 Flexbox 기반 레이아웃을 만듭니다:
+
+┌─────────────────────────────────────┐
+│            HEADER                   │  ← 상단 헤더 (진한 회색 배경)
+├─────────────────────────────────────┤
+│              NAV                    │  ← 네비게이션 (가운데 정렬된 메뉴)
+├─────────────────────────────────────┤
+│         MAIN (Flex Container)       │
+│ ┌─────────────────┬───────────────┐ │
+│ │    SECTION      │     ASIDE     │ │  ← 메인 영역 (flex: 3:1 비율)
+│ │   (flex: 3)     │   (flex: 1)   │ │
+│ └─────────────────┴───────────────┘ │
+├─────────────────────────────────────┤
+│            FOOTER                   │  ← 하단 푸터 (진한 회색 배경)
+└─────────────────────────────────────┘
+
+레이아웃 기술:
+- Flexbox 사용: 현대적이고 유연한 레이아웃 구현
+- 비율 기반: section(flex: 3)과 aside(flex: 1)의 3:1 비율 배치
+- 중앙 정렬: 네비게이션 메뉴의 justify-content: center 사용
+
+디자인 요소:
+- 일관된 색상: #333 (진한 회색), #f4f4f4 (연한 회색) 등 통일된 색상 팔레트
+- 강조 효과: 하이라이트(노란 배경), 중요 텍스트(빨간 굵은 글씨)
+- 시각적 구분: course 박스의 왼쪽 테두리, 테이블의 zebra stripe
+
+사용자 경험:
+- 가독성: line-height 1.6으로 읽기 편한 줄 간격
+- 테이블 최적화: border-collapse와 nth-child를 활용한 깔끔한 표 디자인
+- 브라우저 초기화: margin: 0, padding: 0으로 브라우저 기본값 제거
+
+현대적 접근:
+- Float 대신 Flexbox 사용으로 더 안정적이고 유지보수하기 쉬운 코드
+- 반응형 디자인에 적합한 유연한 구조
+*/
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>웹 프로그래밍 강좌</h1>
+    <p>최신 웹 기술을 배워보세요!</p>
+  </header>
+  
+  <nav>
+    <ul>
+      <li>홈</li>
+      <li>강좌 소개</li>
+      <li>수강 신청</li>
+      <li>자료실</li>
+      <li>문의하기</li>
+    </ul>
+  </nav>
+  
+  <main>
+    <section>
+      <h2>강좌 소개</h2>
+      <p>웹 프로그래밍 강좌에 오신 것을 환영합니다. 이 강좌는 <mark>웹 개발의 기초부터 고급 기술까지</mark> 다루는 종합 과정입니다.</p>
+      
+      <div class="course">
+        <h3>HTML5 기초</h3>
+        <p>HTML5는 <span class="important">웹 페이지의 구조</span>를 정의하는 마크업 언어입니다. 이 과정에서는 다음 내용을 학습합니다:</p>
+        <ul>
+          <li>HTML 문서 구조</li>
+          <li>텍스트 서식 지정</li>
+          <li>목록과 표 만들기</li>
+          <li>시맨틱 태그 활용</li>
+        </ul>
+      </div>
+      
+      <div class="course">
+        <h3>CSS3 스타일링</h3>
+        <p>CSS3는 <span class="important">웹 페이지의 디자인</span>을 담당하는 스타일 시트 언어입니다. 다음 내용을 배웁니다:</p>
+        <ol>
+          <li>선택자와 속성</li>
+          <li>박스 모델</li>
+          <li>레이아웃 설계</li>
+          <li>반응형 웹 디자인</li>
+        </ol>
+      </div>
+      
+      <div class="course">
+        <h3>JavaScript 프로그래밍</h3>
+        <p>JavaScript는 <span class="important">웹 페이지의 동적 기능</span>을 구현하는 프로그래밍 언어입니다.</p>
+        <pre>
+// 간단한 JavaScript 예제
+function sayHello() {
+  alert("안녕하세요!");
+}
+        </pre>
+      </div>
+      
+      <h3>강의 일정</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>주차</th>
+            <th>주제</th>
+            <th>내용</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1-3</td>
+            <td>HTML5</td>
+            <td>웹 문서 구조화, 태그 활용</td>
+          </tr>
+          <tr>
+            <td>4-6</td>
+            <td>CSS3</td>
+            <td>스타일링, 레이아웃</td>
+          </tr>
+          <tr>
+            <td>7-10</td>
+            <td>JavaScript</td>
+            <td>기초 문법, 이벤트 처리</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2">총 강의 시간</td>
+            <td>30시간</td>
+          </tr>
+        </tfoot>
+      </table>
+      
+      <h3>선수 지식</h3>
+      <dl>
+        <dt>컴퓨터 기초</dt>
+        <dd>파일 관리, 텍스트 편집기 사용법</dd>
+        <dt>인터넷 활용</dt>
+        <dd>웹 브라우저 사용, 웹 검색</dd>
+      </dl>
+    </section>
+    
+    <aside>
+      <h3>관련 자료</h3>
+      <ul>
+        <li>HTML5 참고 문서</li>
+        <li>CSS3 스타일 가이드</li>
+        <li>JavaScript 튜토리얼</li>
+      </ul>
+      
+      <h3>추천 도서</h3>
+      <div class="book">
+        <span class="book_title">HTML5 & CSS3 입문</span><br>
+        <span class="book_author">임순범, 박희민</span>
+      </div>
+      <div class="book">
+        <span class="book_title">JavaScript 완벽 가이드</span><br>
+        <span class="book_author">데이비드 플래너건</span>
+      </div>
+      
+      <h3>문의</h3>
+      <p>질문이 있으시면 <strong>webclass@example.com</strong>으로 연락해주세요.</p>
+    </aside>
+  </main>
+  
+  <footer>
+    <p>&copy; 2025 웹 프로그래밍 강좌. 모든 권리 보유.</p>
+    <p><small>작성자: 홍길동</small></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <meta charset="UTF-8">
+      <title>파일 읽기</title>
+    <link rel="stylesheet" href="../res/api.css">
+</head>
+<body>
+<input class="button" type="file" id="files" name="files[]" />
+<script>
+function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+    var f = files[0];
+
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+        alert(e.target.result);
+    };
+    
+    // Read in the image file as a text
+    reader.readAsText(f);                 
+}
+  
+var fileE = document.getElementById('files');
+
+// fileE.onchange = handleFileSelect;
+fileE.addEventListener('change', handleFileSelect, false);
+</script>
+</body>
+</html>

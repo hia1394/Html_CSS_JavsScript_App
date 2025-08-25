@@ -1,0 +1,62 @@
+<!--
+연습문제 6: Display 속성
+과제: 다양한 CSS 디스플레이 속성(block, inline, inline-block, none)을 보여주는 웹페이지를 만드세요.
+-->
+<!DOCTYPE html>
+<html>    
+  <head>
+    <title>Display 속성 연습</title>
+    <style type="text/css">  
+       .block {
+         display: block;
+         background-color: lightblue;
+         padding: 10px;
+         margin: 5px;
+         border: 1px solid blue;
+       }
+       .inline {
+         display: inline;
+         background-color: lightgreen;
+         padding: 5px;
+         border: 1px solid green;
+       }
+       .inline-block {
+         display: inline-block;
+         background-color: lightyellow;
+         padding: 10px;
+         margin: 5px;
+         border: 1px solid orange;
+         width: 100px;
+         height: 50px;
+       }
+       .hidden {
+         display: none;
+       }
+       button {
+         margin-top: 20px;
+       }
+    </style>  
+    <script>
+      function toggleHidden() {
+        var element = document.querySelector('.hidden');
+        if (element.style.display === 'block') {
+          element.style.display = 'none';
+        } else {
+          element.style.display = 'block';
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h3>CSS Display 속성 연습</h3> 
+    <div class="block">이것은 block 요소입니다.</div>
+    <span class="inline">이것은 inline 요소입니다.</span>
+    <span class="inline">이것도 inline 요소입니다.</span>
+    <div class="block">또 다른 block 요소입니다.</div>
+    <div class="inline-block">inline-block 1</div>
+    <div class="inline-block">inline-block 2</div>
+    <div class="inline-block">inline-block 3</div>
+    <div class="hidden">이것은 숨겨진 요소입니다.</div>
+    <button onclick="toggleHidden()">숨겨진 요소 보기/숨기기</button>
+  </body>
+</html>

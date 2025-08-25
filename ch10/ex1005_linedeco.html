@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- 제목: Shape Decoration 1 -->
+<html>
+<head>
+<title> Shape Decoration 1 </title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="150" height="120"></canvas>
+<img id="canvasImage" />
+
+<script type="text/javascript">
+  var canvas = document.getElementById("myCanvas");
+  var context = canvas.getContext("2d");
+
+  context.beginPath();
+  context.moveTo(10, 20);
+  context.lineTo(100,20);
+  context.lineWidth = 20;
+  context.strokeStyle = "blue";
+  context.lineCap = "butt";
+  context.stroke();
+
+  context.beginPath();
+  context.moveTo(10, 60);
+  context.lineTo(100, 60);
+  context.strokeStyle = "red";
+  context.lineCap = "round";
+  context.stroke();
+
+  context.beginPath();
+  context.moveTo(10, 100);
+  context.lineTo(100, 100);
+  context.strokeStyle = "green";
+  context.lineCap = "square";
+  context.stroke();
+</script>
+
+
+</body>
+</html>
+
+
+

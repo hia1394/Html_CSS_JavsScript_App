@@ -1,0 +1,75 @@
+<!--
+연습문제 3: 위치 및 Float 속성 활용하기
+문제: ex621_position.html과 ex623_float.html을 참고하여 다음 요구사항을 만족하는 웹 페이지를 만드세요.
+
+자기 소개를 담은 웹 페이지 만들기
+프로필 이미지를 왼쪽에 float 시키기
+제목과 이름은 절대 위치로 지정하기
+연락처 정보는 페이지 오른쪽 상단에 고정(fixed) 위치로 표시하기
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>내 소개 페이지</title>
+    <style type="text/css">
+      #profile_img {
+        float: left;
+        border: thin solid black;
+        margin: 0 20px 10px 0;
+      }
+      h1 {
+        position: absolute;
+        top: 20px;
+        left: 200px;
+      }
+      #name {
+        position: absolute;
+        top: 70px;
+        left: 220px;
+        font-weight: bold;
+      }
+      #contact {
+        position: fixed;
+        top: 10px;
+        right: 20px;
+        background-color: #f0f0f0;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+      #content {
+        margin-top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>자기 소개</h1>
+    <p id="name">홍길동</p>
+    <div id="contact">
+      <p>이메일: hong@example.com</p>
+      <p>전화: 010-1234-5678</p>
+    </div>
+
+    <div id="content">
+      <img
+        src="images/profile.jpg"
+        id="profile_img"
+        width="150"
+        height="200"
+        alt="프로필 사진"
+      />
+      <p>
+        안녕하세요, 저는 웹 개발에 관심이 많은 홍길동입니다. HTML, CSS,
+        JavaScript를 공부하고 있으며, 웹 개발자로 성장하고자 합니다.
+      </p>
+      <p>
+        현재 HTML과 CSS를 배우고 있으며, 특히 CSS의 다양한 위치 속성과 Float
+        속성에 대해 학습하고 있습니다. 이러한 속성을 활용하여 더 나은 웹
+        페이지를 만들어보고 싶습니다.
+      </p>
+      <p>
+        앞으로 다양한 웹 프로젝트를 진행하며 실력을 쌓아나갈 계획입니다. 많은
+        관심과 격려 부탁드립니다.
+      </p>
+    </div>
+  </body>
+</html>

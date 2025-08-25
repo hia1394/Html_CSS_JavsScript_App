@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>로고 애니메이션</title>
+    <style type="text/css">
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      @keyframes logo-move {
+        0% {
+          transform: translateY(0) scale(1);
+          background-color: red;
+        }
+        25% {
+          transform: translateY(-50px) scale(1.2);
+          background-color: orange;
+        }
+        50% {
+          transform: translateY(0) scale(1.5);
+          background-color: yellow;
+        }
+        75% {
+          transform: translateY(50px) scale(1.2);
+          background-color: green;
+        }
+        100% {
+          transform: translateY(0) scale(1);
+          background-color: red;
+        }
+      }
+
+      @keyframes text-color {
+        0% {
+          color: red;
+        }
+        25% {
+          color: orange;
+        }
+        50% {
+          color: green;
+        }
+        75% {
+          color: blue;
+        }
+        100% {
+          color: red;
+        }
+      }
+
+      .logo-container {
+        margin: 100px auto;
+        position: relative;
+        width: 300px;
+        height: 300px;
+      }
+
+      .logo {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: logo-move 4s infinite ease-in-out;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .company-name {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        bottom: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        animation: text-color 4s infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>애니메이션 로고</h1>
+
+    <div class="logo-container">
+      <div class="logo"></div>
+      <div class="company-name">Creative Web</div>
+    </div>
+
+    <p>이 로고는 CSS 애니메이션을 사용하여 구현되었습니다.</p>
+    <p>
+      로고는 위치, 크기, 색상이 변하는 애니메이션이 적용되었으며, 회사 이름은
+      색상이 변하는 애니메이션이 적용되었습니다.
+    </p>
+    <p>두 애니메이션 모두 무한 반복됩니다.</p>
+  </body>
+</html>

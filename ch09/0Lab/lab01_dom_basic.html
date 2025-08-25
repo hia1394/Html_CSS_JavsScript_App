@@ -1,0 +1,96 @@
+<!--
+연습문제 1: 간단한 계산기 구현
+문제: DOM을 활용하여 간단한 계산기를 만드세요.
+
+두 개의 숫자 입력 필드
+사칙연산(+, -, *, /) 버튼들
+결과를 표시하는 영역
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>간단한 계산기</title>
+<style>
+    .calculator {
+        width: 300px;
+        margin: 20px auto;
+        text-align: center;
+    }
+    input[type="number"] {
+        width: 80px;
+        height: 30px;
+        text-align: center;
+        font-size: 18px;
+    }
+    button {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        margin: 5px;
+    }
+    #result {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="calculator">
+    <h2>간단한 계산기</h2>
+    <input type="number" id="num1" placeholder="숫자1">
+    <span> ? </span>
+    <input type="number" id="num2" placeholder="숫자2">
+    <br><br>
+    <button onclick="calculate('+')">+</button>
+    <button onclick="calculate('-')">-</button>
+    <button onclick="calculate('*')">×</button>
+    <button onclick="calculate('/')">/</button>
+    <button onclick="clearAll()">C</button>
+    <br>
+    <div id="result">결과가 여기에 표시됩니다</div>
+</div>
+
+<script>
+function calculate(operator) {
+    var num1 = parseFloat(document.getElementById('num1').value);
+    var num2 = parseFloat(document.getElementById('num2').value);
+    var result;
+    
+    if (isNaN(num1) || isNaN(num2)) {
+        document.getElementById('result').innerHTML = "올바른 숫자를 입력하세요";
+        return;
+    }
+    
+    switch(operator) {
+        case '+':
+            result = num1 + num2;
+            break;
+        case '-':
+            result = num1 - num2;
+            break;
+        case '*':
+            result = num1 * num2;
+            break;
+        case '/':
+            if (num2 == 0) {
+                document.getElementById('result').innerHTML = "0으로 나눌 수 없습니다";
+                return;
+            }
+            result = num1 / num2;
+            break;
+    }
+    
+    document.getElementById('result').innerHTML = 
+        num1 + " " + operator + " " + num2 + " = " + result.toFixed(2);
+}
+
+function clearAll() {
+    document.getElementById('num1').value = '';
+    document.getElementById('num2').value = '';
+    document.getElementById('result').innerHTML = '결과가 여기에 표시됩니다';
+}
+</script>
+</body>
+</html>

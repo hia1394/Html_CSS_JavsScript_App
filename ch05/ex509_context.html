@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>선택자 조합하기</title>
+    <style type="text/css">
+      p {
+        font-size: 10pt;
+      }
+      h3:after {
+        content: " (♬sblim)";
+        font-size: 10pt;
+      } /* h3요소의 뒤에 콘텐츠 삽입 */
+      h3 strong {
+        font-style: italic;
+      } /* h3에 속하는 strong 요소 */
+      p strong {
+        color: red;
+      } /* p에 속하는 strong 요소 */
+      p > strong {
+        color: blue;
+      } /* p요소 바로 아래에 속하는 strong 요소 */
+      h3 + p {
+        font-style: italic;
+      } /* h3요소 바로 다음에 있는 p요소 */
+    </style>
+  </head>
+  <body>
+    <h3><strong>스타일시트</strong> 이해하기</h3>
+    <p>
+      이 예제는 <span id="test"><strong>CSS</strong>의 개념</span>을 설명합니다.
+      <br /><a href="http://www.w3c.org">가상클래스</a>와
+      <a href="https://www.w3schools.com/">선택자조합</a>으로 스타일을 지정합니다.
+    </p>
+    <p>다음 <strong>CSS 속성</strong> 예제로 이어집니다.</p>
+  </body>
+</html>

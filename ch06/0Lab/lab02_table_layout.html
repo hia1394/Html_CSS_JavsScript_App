@@ -1,0 +1,80 @@
+<!--
+연습문제 2: 테이블 스타일 적용하기
+문제: ex613_table_layout.html와 ex614_table_border.html을 참고하여 다음을 만족하는 웹 페이지를 만드세요.
+
+자신의 주간 일정표를 표로 작성
+표의 제목은 굵은 글씨와 14pt로 지정
+테이블 테두리는 collapse 스타일 사용
+주말 일정은 배경색 변경하기
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>나의 주간 일정표</title>
+    <style type="text/css">
+      #schedule caption {
+        font-size: 14pt;
+        font-weight: bold;
+        margin: 0.5em;
+      }
+      #schedule {
+        border-collapse: collapse;
+        width: 90%;
+      }
+      .weekend {
+        background-color: #ffcccc;
+      }
+    </style>
+  </head>
+  <body>
+    <table border="1" id="schedule">
+      <caption>
+        나의 주간 일정표
+      </caption>
+      <thead>
+        <tr>
+          <th>시간</th>
+          <th>월요일</th>
+          <th>화요일</th>
+          <th>수요일</th>
+          <th>목요일</th>
+          <th>금요일</th>
+          <th class="weekend">토요일</th>
+          <th class="weekend">일요일</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>09:00-11:00</td>
+          <td>HTML 수업</td>
+          <td>CSS 수업</td>
+          <td>자바스크립트</td>
+          <td>HTML 수업</td>
+          <td>프로젝트</td>
+          <td class="weekend">휴식</td>
+          <td class="weekend">휴식</td>
+        </tr>
+        <tr>
+          <td>11:00-13:00</td>
+          <td>점심 식사</td>
+          <td>점심 식사</td>
+          <td>점심 식사</td>
+          <td>점심 식사</td>
+          <td>점심 식사</td>
+          <td class="weekend">점심 식사</td>
+          <td class="weekend">점심 식사</td>
+        </tr>
+        <tr>
+          <td>13:00-15:00</td>
+          <td>프로젝트</td>
+          <td>프로젝트</td>
+          <td>프로젝트</td>
+          <td>프로젝트</td>
+          <td>프로젝트</td>
+          <td class="weekend">취미 활동</td>
+          <td class="weekend">가족 시간</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!--
+연습문제 6: 종합 문제 - 도서관 관리 시스템
+문제: 도서관 관리 시스템을 구현하세요. 다음 기능들을 포함해야 합니다.
+
+책 객체 (제목, 저자, 출판년도, ISBN)
+책 추가 기능
+책 검색 기능 (제목으로 검색)
+모든 책 목록 보기
+평균 출판년도 계산
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>도서관 관리 시스템</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    // 책 생성자 함수
+    function Book(title, author, year, isbn) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.isbn = isbn;
+        
+        this.toString = function() {
+            return "제목: " + this.title + ", 저자: " + this.author + 
+                   ", 출판년도: " + this.year + ", ISBN: " + this.isbn;
+        };
+    }
+    
+    // 도서관 객체
+    var library = {
+        books: [],
+        
+        // 책 추가
+        addBook: function(book) {
+            this.books.push(book);
+            alert("책이 추가되었습니다: " + book.title);
+        },
+        
+        // 제목으로 책 검색
+        searchByTitle: function(title) {
+            var found = [];
+            for(var i = 0; i < this.books.length; i++) {
+                if(this.books[i].title.toLowerCase().indexOf(title.toLowerCase()) !== -1) {
+                    found.push(this.books[i]);
+                }
+            }
+            return found;
+        },
+        
+        // 모든 책 목록
+        listAllBooks: function() {
+            if(this.books.length === 0) {
+                return "등록된 책이 없습니다.";
+            }
+            
+            var list = "<h3>전체 도서 목록</h3>";
+            for(var i = 0; i < this.books.length; i++) {
+                list += (i + 1) + ". " + this.books[i].toString() + "<br/>";
+            }
+            return list;
+        },
+        
+        // 평균 출판년도 계산
+        getAverageYear: function() {
+            if(this.books.length === 0) return 0;
+            
+            var sum = 0;
+            for(var i = 0; i < this.books.length; i++) {
+                sum += this.books[i].year;
+            }
+            return sum / this.books.length;
+        }
+    };
+    
+    // 기본 책들 추가
+    library.addBook(new Book("웹 프로그래밍", "홍길동", 2021, "978-1234567890"));
+    library.addBook(new Book("JavaScript 기초", "김철수", 2020, "978-0987654321"));
+    library.addBook(new Book("HTML5 입문", "이영희", 2019, "978-1122334455"));
+    
+    // 메뉴 시스템
+    function showMenu() {
+        var choice = prompt("도서관 관리 시스템\n" +
+                          "1. 책 추가\n" +
+                          "2. 책 검색\n" +
+                          "3. 전체 목록 보기\n" +
+                          "4. 통계 보기\n" +
+                          "5. 종료\n" +
+                          "선택하세요:");
+        
+        switch(choice) {
+            case "1":
+                var title = prompt("책 제목을 입력하세요:");
+                var author = prompt("저자를 입력하세요:");
+                var year = parseInt(prompt("출판년도를 입력하세요:"));
+                var isbn = prompt("ISBN을 입력하세요:");
+                library.addBook(new Book(title, author, year, isbn));
+                showMenu();
+                break;
+                
+            case "2":
+                var searchTitle = prompt("검색할 책 제목을 입력하세요:");
+                var results = library.searchByTitle(searchTitle);
+                if(results.length > 0) {
+                    var output = "<h3>검색 결과</h3>";
+                    for(var i = 0; i < results.length; i++) {
+                        output += results[i].toString() + "<br/>";
+                    }
+                    document.write(output);
+                } else {
+                    alert("검색 결과가 없습니다.");
+                }
+                showMenu();
+                break;
+                
+            case "3":
+                document.write(library.listAllBooks());
+                showMenu();
+                break;
+                
+            case "4":
+                var avgYear = library.getAverageYear();
+                document.write("<h3>도서관 통계</h3>");
+                document.write("총 책 수: " + library.books.length + "권<br/>");
+                document.write("평균 출판년도: " + avgYear.toFixed(1) + "년<br/>");
+                showMenu();
+                break;
+                
+            case "5":
+                alert("프로그램을 종료합니다.");
+                break;
+                
+            default:
+                alert("잘못된 선택입니다.");
+                showMenu();
+        }
+    }
+    
+    // 프로그램 시작
+    showMenu();
+</script>
+</body>
+</html>
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- An example for JavaScript Control/Loop Statements -->
+<html>
+<head>
+<meta charset="utf-8" />
+<title> Control & Loop Statements </title>
+</head>
+<body>
+
+<p> A Simple JavaScript Example for Control and Loop Statements <br/> </p>
+<table border="1">
+<script type="text/javascript">
+    document.write("<caption> 책 주문 입력 내용 </caption>");
+    document.write("<tr>");
+    document.write("<th> 번호 </th> <th> 제목 </th>");
+    document.write("</tr>");
+
+    var book1 = "멀티미디어 배움터2.0";
+    var book2 = "모바일 멀티미디어";
+    var book3 = "자바입문: 이론과 실습";
+    var order_list = "";
+    var n = prompt("주문할 책 수량을 입력 하세요.","1");
+
+    for(i = 0; i < n; i++) {
+      var book_list = book1 + "\n" + book2 + "\n" + book3;
+      var choice = prompt("책 제목을 선택하세요...\n" + book_list, "1");
+
+      if (choice == "1")
+          title = book1;
+      else if (choice == "2")
+          title = book2;
+      else if (choice == "3")
+          title = book3;
+      else {
+          alert("리스트에 없는 책을 선택하셨습니다.");
+          title = "";
+      }
+
+      document.write("<tr>");
+      document.write("<td>" + (i+1) + "</td>");
+      document.write("<td>" + title + "</td>");
+      document.write("</tr>");
+      order_list += "\n" + title + " ";
+    }
+</script>
+</table>
+
+</body>
+</html>

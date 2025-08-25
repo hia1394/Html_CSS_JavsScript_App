@@ -1,0 +1,30 @@
+<!--
+기초 단계: HTML 기본 폼 요소 이해하기
+연습문제 1: 기본 폼 생성하기
+문제: 사용자의 이름, 이메일, 간단한 메시지를 입력받는 기본 폼을 작성하세요. 폼은 submit 버튼을 포함해야 합니다.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>기본 폼 생성</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h2>기본 연락 폼</h2>
+  <form method="get" action="../all_result.html">
+    <p>
+      이름: <input type="text" name="name" required>
+    </p>
+    <p>
+      이메일: <input type="email" name="email" required>
+    </p>
+    <p>
+      메시지:<br>
+      <textarea name="message" rows="5" cols="40" required></textarea>
+    </p>
+    <p>
+      <input type="submit" value="전송하기">
+    </p>
+  </form>
+</body>
+</html>

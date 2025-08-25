@@ -1,0 +1,33 @@
+<!--
+연습문제 5: 오디오 요소 사용하기 (ex305_audio1.html, ex306_audio2.html 기반)
+문제: 다양한 형식의 오디오 파일을 지원하는 오디오 플레이어를 만드세요.
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>오디오 요소 연습</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <h2>HTML5 오디오 플레이어</h2>
+
+    <h3>기본 오디오 플레이어</h3>
+    <audio controls>
+      <source src="audio/handel.mp3" type="audio/mp3" />
+      <source src="audio/handel.ogg" type="audio/ogg" />
+      <source src="audio/handel.wav" type="audio/wav" />
+      브라우저가 오디오 요소를 지원하지 않거나 오디오 형식을 재생할 수 없습니다.
+    </audio>
+
+    <h3>추가 기능이 있는 오디오 플레이어</h3>
+    <audio controls autoplay loop>
+      <source src="audio/handel.mp3" type="audio/mp3" />
+      브라우저가 오디오 요소를 지원하지 않습니다.
+    </audio>
+
+    <p>
+      참고: autoplay 속성은 대부분의 브라우저에서 사용자 경험을 위해 기본적으로
+      음소거 상태나 비활성화되어 있을 수 있습니다.
+    </p>
+  </body>
+</html>

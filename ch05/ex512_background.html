@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>배경관련 속성</title>
+    <style type="text/css">
+      /*
+        background-repeat의 기본값과 차이점:
+        기본값(default): background-repeat를 설정하지 않으면 기본값은 **repeat**입니다.
+        repeat와 repeat-x의 차이점:
+         : repeat: 이미지가 가로와 세로 방향 모두 반복됩니다 (기본값)
+         : repeat-x: 이미지가 가로 방향(x축)으로만 반복됩니다
+         : repeat-y: 이미지가 세로 방향(y축)으로만 반복됩니다
+         : no-repeat: 이미지가 반복되지 않고 한 번만 표시됩니다
+      */
+       /* ========== h3 제목 기본 스타일 ========== */
+      h3 {
+        color: red;                        /* h3 텍스트 색상을 빨간색으로 설정 */
+        background-color: #90ff90;         /* h3 배경색을 연한 초록색(#90ff90)으로 설정 */
+      }
+      
+      /* ========== h3 가상 요소 스타일 (추가 텍스트) ========== */
+      h3:after {
+        content: " (♬sblim)";             /* h3 요소 뒤에 " (♬sblim)" 텍스트 자동 추가 */
+        font-size: 10pt;                  /* 추가된 텍스트의 크기를 10포인트로 설정 */
+      }
+      
+      /* ========== 첫 번째 셀: 가로 방향 반복 배경 ========== */
+      #first {
+        background-image: url(images/flower.jpg);  /* 배경 이미지로 flower.jpg 파일 설정 */
+        background-repeat: repeat-x;               /* 배경 이미지를 가로 방향(x축)으로만 반복 */
+      }                                           /* 세로 방향으로는 반복되지 않음 */
+      
+      /* ========== 두 번째 셀: 기본 반복 배경 ========== */
+      #second {
+        background-image: url(images/flower.jpg);  /* 배경 이미지로 flower.jpg 파일 설정 */
+        /* background-repeat 속성을 명시하지 않음 */
+        /* 기본값인 repeat가 적용되어 가로, 세로 모든 방향으로 반복됨 */
+      }
+      
+      /* ========== 세 번째 셀: 반복 없는 위치 지정 배경 ========== */
+      #third {
+        background-image: url(images/flower.jpg);  /* 배경 이미지로 flower.jpg 파일 설정 */
+        background-repeat: no-repeat;              /* 배경 이미지를 반복하지 않고 한 번만 표시 */
+        background-position: center bottom;        /* 배경 이미지를 가로 중앙, 세로 하단에 위치시킴 */
+      }
+    </style>
+  </head>
+  <body>
+        <!-- 페이지 제목 (CSS로 스타일링됨) -->
+    <h3>CSS 배경관련 속성</h3>
+    
+    <!-- 배경 속성 비교를 위한 테이블 -->
+    <table border="1">                           <!-- 테이블에 1픽셀 테두리 적용 -->
+      <tr>                                       <!-- 테이블 행 시작 -->        
+        <!-- 첫 번째 셀: repeat-x 효과 시연 -->
+        <td id="first">                          <!-- CSS의 #first 선택자에 의해 스타일링됨 -->
+          배경 이미지 first<br />                 <!-- 셀 제목 -->
+          &bull; url(파일경로) <br />             <!-- bullet point(•) 문자로 목록 표시 -->
+          <br />
+          &bull; background-repeat : <br />       <!-- 배경 반복 속성 설명 -->
+          &nbsp; ◎ repeat-x                      <!-- &nbsp;는 공백 문자, ◎는 원형 기호 -->
+        </td>
+        <!-- 두 번째 셀: 기본 repeat 효과 시연 -->
+        <td id="second">                         <!-- CSS의 #second 선택자에 의해 스타일링됨 -->
+          배경 이미지 second<br />                <!-- 셀 제목 -->
+          &bull; url(파일경로) <br />             <!-- 배경 이미지 파일 경로 설명 -->
+          <br />
+          &bull; background-repeat : <br />       <!-- 배경 반복 속성 설명 -->
+          &nbsp; ◎ repeat                        <!-- 기본값인 repeat 설명 -->
+        </td>        
+        <!-- 세 번째 셀: no-repeat과 position 효과 시연 -->
+        <td id="third">                          <!-- CSS의 #third 선택자에 의해 스타일링됨 -->
+          배경 이미지 third <br />                <!-- 셀 제목 -->
+          <br />
+          &bull; background-repeat : <br />       <!-- 배경 반복 속성 설명 -->
+          &nbsp; ◎ no-repeat, <br />             <!-- 반복 없음 설정 -->
+          <br />
+          &bull; background-position : <br />     <!-- 배경 위치 속성 설명 -->
+          &nbsp; ◎ center bottom                 <!-- 가로 중앙, 세로 하단 위치 -->
+        </td>        
+      </tr>                                      <!-- 테이블 행 종료 -->
+    </table>
+  </body>
+</html>

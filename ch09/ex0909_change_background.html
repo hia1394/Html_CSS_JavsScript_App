@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> CSS Access using JavaScript </title>
+</head>
+<body>
+
+<div id="outerBox" style="background: blue; width: 550px; height:300px;">
+
+<div id="innerBox"
+     style="background: yellow; width: 450px; height:200px;
+            position: absolute; left: 50px; top: 50px;">
+
+    <img id="img1" src="images/image1.png" width="100px"
+       style="position: absolute; left: 50px; top: 25px; visibility: visible;">
+
+    <img id="img2" src="images/image2.png" width="100px"
+       style="position: absolute; left: 175px; top: 25px; visibility: visible;">
+
+    <img id="img3" src="images/image3.png" width="100px"
+       style="position: absolute; left: 300px; top: 25px; visibility: visible;">
+</div>
+
+</div>
+
+<script type="text/javascript">
+function changeColor(id, color) {
+    document.getElementById(id).style.background = color;
+}
+</script>
+
+Outer Box:
+<button onclick = "changeColor('outerBox', 'red');">    Red    </button>
+<button onclick = "changeColor('outerBox', 'green');">  Green  </button>
+<button onclick = "changeColor('outerBox', 'blue');">   Blue   </button>
+<button onclick = "changeColor('outerBox', 'grey');">   Grey   </button>
+<button onclick = "changeColor('outerBox', 'white');">  White  </button>
+<br />
+
+Inner Box:
+<button onclick = "changeColor('innerBox', 'red');">    Red    </button>
+<button onclick = "changeColor('innerBox', 'green');">  Green  </button>
+<button onclick = "changeColor('innerBox', 'blue');">   Blue   </button>
+<button onclick = "changeColor('innerBox', 'grey');">   Grey   </button>
+<button onclick = "changeColor('innerBox', 'white');">  White  </button>
+
+</body>
+</html>

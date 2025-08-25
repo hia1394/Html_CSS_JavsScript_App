@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>웹 알림 사용하기</title>
+    <link rel="stylesheet" href="../res/api.css">
+</head>
+<body>
+<div>
+    <span class="button" onclick="clickShow();">Show</span>
+    <span class="button" onclick="clickCancel();">Cancel</span>
+</div>
+
+<script type="text/javascript">
+var noti = null;
+
+function showNotification() {
+     if (!!window.webkitNotifications) { 
+        if (window.webkitNotifications.checkPermission() == 0 ) {
+            var picture = "../res/HTML5_Logo_64.png"; 
+            var titleStr = "현재 시각";
+            var bodyStr = new Date();;      
+            
+            noti = window.webkitNotifications.createNotification(picture, titleStr, bodyStr);
+            noti.show();
+        } else {
+            window.webkitNotifications.requestPermission(showNotification);
+        }   
+     } else {
+        alert("현재 브라우저는 Notifications를 지원하지 않습니다");
+     }
+}
+
+function clickShow() {
+    if (noti == null)
+        showNotification();
+}
+
+function clickCancel() {
+    if (noti != null) {
+        noti.cancel();
+        noti = null;
+    }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>목록에 스타일 지정</title>
+    <style type="text/css">
+      /* ========== 순서 있는 목록(ol) 내부의 모든 li 요소 스타일 ========== */
+      ol li {
+        list-style-type: upper-alpha;           /* ol 안의 모든 li를 대문자 알파벳(A, B, C...)으로 표시 */
+      }                                         /* 기본 숫자(1, 2, 3...) 대신 A, B, C... 사용 */
+      
+      /* ========== usa 클래스 목록 아이템 스타일 (외국 도서용) ========== */
+      li.usa {
+        list-style-type: disc;                  /* class="usa"인 li 요소를 채워진 원(●)으로 표시 */
+      }                                         /* 외국 도서를 구분하기 위한 스타일 */
+      
+      /* ========== kor 클래스 목록 아이템 스타일 (국내 도서용) ========== */
+      li.kor {
+        list-style-type: circle;                /* class="kor"인 li 요소를 빈 원(○)으로 표시 */
+      }                                         /* 국내 도서를 구분하기 위한 스타일 */
+      
+      /* ========== renew 클래스 목록 아이템 스타일 (신규 항목용) ========== */
+      li.renew {
+        list-style-type: square;                /* class="renew"인 li 요소를 사각형(■)으로 표시 */
+      }                                         /* 신규 추가 예정 항목을 구분하기 위한 스타일 */
+    </style>
+  </head>
+  <body>
+    <!-- 페이지 제목 -->
+    <h3>과목별 추천도서 목록</h3>
+    
+    <!-- 메인 순서 목록 시작 -->
+    <ol>                                        <!-- 순서 있는 목록 (기본적으로 1, 2, 3... 표시) -->
+      
+      <!-- 첫 번째 과목 -->
+      <li>멀티미디어 이해</li>                   <!-- ol li 스타일 적용: A. 멀티미디어 이해 -->
+      
+      <!-- 첫 번째 과목의 추천도서 목록 -->
+      <ul>                                      <!-- 순서 없는 목록 (하위 목록) -->
+        <li class="kor">최윤철, 임순범 공저, 멀티미디어배움터 2.0</li>
+        <!-- class="kor" 적용: ○ 최윤철, 임순범 공저, 멀티미디어배움터 2.0 -->
+        
+        <li class="usa">T.Vaughan, Multimedia: Making It Work, 7th Ed.</li>
+        <!-- class="usa" 적용: ● T.Vaughan, Multimedia: Making It Work, 7th Ed. -->
+        
+        <li class="usa">Z.Li and M.S.Drew, Fundamentals of Multimedia</li>
+        <!-- class="usa" 적용: ● Z.Li and M.S.Drew, Fundamentals of Multimedia -->
+      </ul>
+      
+      <!-- 두 번째 과목 -->
+      <li>인터넷 개론</li>                      <!-- ol li 스타일 적용: B. 인터넷 개론 -->
+      
+      <!-- 두 번째 과목의 추천도서 목록 -->
+      <ul>                                      <!-- 순서 없는 목록 (하위 목록) -->
+        <li class="kor">최윤철, 임순범 공저, 인터넷배움터 2.0</li>
+        <!-- class="kor" 적용: ○ 최윤철, 임순범 공저, 인터넷배움터 2.0 -->
+        
+        <li class="kor">임순범 외 공저, HTML5 웹 프로그래밍 입문</li>
+        <!-- class="kor" 적용: ○ 임순범 외 공저, HTML5 웹 프로그래밍 입문 -->
+        
+        <li class="renew">신규 추가 예정</li>
+        <!-- class="renew" 적용: ■ 신규 추가 예정 -->
+      </ul>
+      
+    </ol>                                       <!-- 메인 순서 목록 종료 -->
+  </body>
+</html>

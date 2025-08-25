@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>요소 끌기</title>
+    <link rel="stylesheet" href="../res/api.css">
+</head>
+<body>
+<div id="src">
+    <img id="semantics" src="../res/HTML5_Semantics_64.png" draggable="false">
+    <img id="multimedia" src="../res/HTML5_Multimedia_64.png" draggable="true">
+    <img id="styling" src="../res/HTML5_Styling_64.png" draggable="true">
+</div>
+<br>
+<table>
+    <tr><td>Drag Source Id</td><td id="srcId"></td></tr>
+    <tr><td>Output</td><td id="o"></td></tr>
+</table>
+
+<script type="text/javascript">
+var src = document.getElementById("src");
+var isDragging;
+var srcId;
+
+src.ondragstart = function (e) {
+    srcId = e.target.id;
+    document.getElementById("srcId").innerHTML = srcId;
+    document.getElementById("o").innerHTML = "dragstart: " + srcId;
+    isDragging = false;
+}
+
+src.ondrag = function (e) {
+    if (isDragging == false) {
+        document.getElementById("o").innerHTML += "<br>drag: " + srcId;
+        isDragging = true;
+    }
+}
+
+src.ondragend = function (e) {
+    document.getElementById("o").innerHTML += "<br>dragend: " + srcId;
+}
+</script>
+</body>
+</html>

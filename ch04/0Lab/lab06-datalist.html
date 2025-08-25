@@ -1,0 +1,165 @@
+<!--
+연습문제 6: HTML5 datalist와 output 활용하기
+문제: 온라인 쇼핑몰 주문 폼을 만드세요. 제품명은 datalist를 사용하여 미리 정의된 선택지를 제공하고, 
+수량과 가격에는 number 입력 타입을 사용하여 총액을 output 요소로 표시하세요.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>온라인 쇼핑몰 주문</title>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: 'Malgun Gothic', 'Segoe UI', sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .form-container {
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input, select, output {
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    input[type="number"] {
+      width: 150px;
+    }
+    output {
+      display: inline-block;
+      background-color: #e9ecef;
+      width: auto;
+      min-width: 150px;
+      font-weight: bold;
+    }
+    .result-section {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+    }
+    .btn-submit {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .btn-submit:hover {
+      background-color: #45a049;
+    }
+  </style>
+  <script src="order_process.js"></script>
+</head>
+<body>
+  <div class="form-container">
+    <h2>온라인 쇼핑몰 주문</h2>
+    <!-- <form method="post" action="order_process.php" id="orderForm"> -->
+    <form id="orderForm" onsubmit="processOrder(event)">        
+      <div class="form-group">
+        <label for="customer">고객명:</label>
+        <input type="text" id="customer" name="customer" placeholder="이름을 입력하세요" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="product">제품명:</label>
+        <input type="text" id="product" name="product" list="products" placeholder="제품을 선택하거나 입력하세요" oninput="updatePrice()" required>
+        <datalist id="products">
+          <option value="스마트폰" data-price="1200000"></option>
+          <option value="노트북" data-price="1500000"></option>
+          <option value="태블릿" data-price="800000"></option>
+          <option value="스마트워치" data-price="350000"></option>
+          <option value="무선이어폰" data-price="220000"></option>
+        </datalist>
+      </div>
+      
+      <div class="form-group">
+        <label for="price">가격 (원):</label>
+        <input type="number" id="price" name="price" min="0" step="1000" value="0" oninput="calculateTotal()">
+      </div>
+      
+      <div class="form-group">
+        <label for="quantity">수량:</label>
+        <input type="number" id="quantity" name="quantity" min="1" max="10" step="1" value="1" oninput="calculateTotal()">
+      </div>
+      
+      <div class="form-group">
+        <label for="shipping">배송 방법:</label>
+        <select id="shipping" name="shipping" onchange="calculateTotal()">
+          <option value="0">일반 배송 (무료)</option>
+          <option value="3000">빠른 배송 (+3,000원)</option>
+          <option value="5000">당일 배송 (+5,000원)</option>
+        </select>
+      </div>
+      
+      <div class="result-section">
+        <div class="form-group">
+          <label for="total">총 주문금액:</label>
+          <output id="total" name="total">0원</output>
+        </div>
+      </div>
+      
+      <div class="form-group" style="margin-top: 20px;">
+        <button type="submit" class="btn-submit">주문하기</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // 제품 선택 시 가격 자동 업데이트
+    function updatePrice() {
+      const productInput = document.getElementById('product');
+      const priceInput = document.getElementById('price');
+      const productList = document.getElementById('products');
+      const options = productList.options;
+      
+      // 선택된 제품의 가격 찾기
+      for (let i = 0; i < options.length; i++) {
+        if (options[i].value === productInput.value) {
+          const price = options[i].getAttribute('data-price');
+          if (price) {
+            priceInput.value = price;
+            break;
+          }
+        }
+      }
+      
+      // 총액 계산
+      calculateTotal();
+    }
+    
+    // 총액 계산 함수
+    function calculateTotal() {
+      const price = parseFloat(document.getElementById('price').value) || 0;
+      const quantity = parseInt(document.getElementById('quantity').value) || 0;
+      const shipping = parseFloat(document.getElementById('shipping').value) || 0;
+      
+      const subtotal = price * quantity;
+      const total = subtotal + shipping;
+      
+      // 천 단위 구분 기호 포함하여 표시
+      document.getElementById('total').value = total.toLocaleString() + '원';
+    }
+    
+    // 페이지 로드 시 초기 계산
+    window.onload = function() {
+      calculateTotal();
+    };
+  </script>
+</body>
+</html>

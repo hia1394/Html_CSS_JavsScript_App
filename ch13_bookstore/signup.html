@@ -1,0 +1,152 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title> Signup Page </title>
+<link rel="stylesheet" type="text/css" href="css/style-size.css"/>
+<link rel="stylesheet" type="text/css" href="css/style-layout.css"/>
+<link rel="stylesheet" type="text/css" href="css/style-size.css"/>
+</head>
+<body id="signup">
+    <form id="signupForm">    
+        <fieldset>
+            <legend>회원가입</legend>
+            <span>사용자 아이디</span>
+            <input id="username2" name="username" type="text" required/>
+            <input id="dup_check" type="button" value="중복체크" onclick="checkDuplicate()"/><br/>
+            <span>비밀번호</span> 
+            <input id="pass1" name="password" type="password" required minlength="4"><br/>
+            <span>비밀번호 확인</span> 
+            <input id="pass2" type="password" required minlength="4"><br/>
+            <span>이름</span> 
+            <input id="name" name="name" type="text" required><br/>
+            <span>전화번호</span> 
+            <input id="phone" name="phone" type="tel" required/><br/>
+            <span>이메일</span> 
+            <input id="email" name="email" type="email" required><br/>
+            <span>생일</span> 
+            <input id="birthday" name="birthday" type="date" required/><br/>
+            <span>연령대</span>
+            <select id="age" name="age" required>
+                <option value="">선택하세요</option>
+                <option value="10대 이하">10대 이하</option>
+                <option value="20대">20대</option>
+                <option value="30대">30대</option>
+                <option value="40대">40대</option>
+                <option value="50대 이상">50대 이상</option>
+            </select><br/>
+            <span>관심분야</span>
+            <label>인문학
+              <input type="checkbox" value="humanity" name="interest"></label>
+            <label>교육
+              <input type="checkbox" value="education" name="interest"></label>
+            <label>예술
+              <input type="checkbox" value="art" name="interest"></label>
+            <label>컴퓨터
+              <input type="checkbox" value="computer" name="interest"></label>
+            <label>기타분야
+              <input type="checkbox" value="etc" name="interest"></label>
+            <br/>
+            <span>배경 색상</span> 
+            <input id="color" name="color" type="color"/><br/>
+            간단한 자기소개<br/>
+            <textarea id="intro" name="introduction" cols="30" rows="5" placeholder="간단한 자기소개를 써 주세요."></textarea>
+        </fieldset>
+        <input id="signup_button" type="submit" value="회원가입"/>
+        <input id="reset2" type="button" value="취소" onclick="resetForm()"/>
+    </form> 
+    
+    <script type="text/javascript">
+        let isUsernameDuplicate = true;
+        
+        // 중복체크
+        function checkDuplicate() {
+            const username = document.getElementById('username2').value;
+            if (!username) {
+                alert('아이디를 입력해주세요.');
+                return;
+            }
+            
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const exists = users.some(user => user.username === username);
+            
+            if (exists || username === 'admin') {
+                alert('이미 사용중인 아이디입니다.');
+                isUsernameDuplicate = true;
+            } else {
+                alert('사용 가능한 아이디입니다.');
+                isUsernameDuplicate = false;
+            }
+        }
+        
+        // 아이디 변경시 중복체크 초기화
+        document.getElementById('username2').addEventListener('input', function() {
+            isUsernameDuplicate = true;
+        });
+        
+        // 폼 제출
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (isUsernameDuplicate) {
+                alert('아이디 중복 확인을 해주세요.');
+                return;
+            }
+            
+            const password1 = document.getElementById('pass1').value;
+            const password2 = document.getElementById('pass2').value;
+            
+            if (password1 !== password2) {
+                alert('비밀번호가 일치하지 않습니다.');
+                return;
+            }
+            
+            // 관심분야 수집
+            const interests = [];
+            document.querySelectorAll('input[name="interest"]:checked').forEach(cb => {
+                interests.push(cb.value);
+            });
+            
+           // 사용자 데이터 구성
+            const userData = {
+                username: document.getElementById('username2').value,
+                password: password1,
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                birthday: document.getElementById('birthday').value,
+                age: document.getElementById('age').value,
+                interests: interests,
+                color: document.getElementById('color').value,
+                introduction: document.getElementById('intro').value,
+                registDate: new Date().toISOString()
+            };
+            
+            // 사용자 목록에 추가
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            users.push(userData);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            alert('회원가입이 완료되었습니다!');
+            
+            // 부모 창에 알림 (iframe에서 열린 경우)
+            if (window.parent !== window) {
+                window.parent.postMessage({
+                    type: 'signup-complete',
+                    username: userData.username
+                }, '*');
+                
+                // 로그인 페이지로 이동
+                window.parent.document.querySelector('iframe[name="display_area"]').src = 'login.html';
+            }
+        });
+        
+        function resetForm() {
+            if (confirm('작성중인 내용을 모두 취소하시겠습니까?')) {
+                document.getElementById('signupForm').reset();
+                isUsernameDuplicate = true;
+            }
+        }
+    </script>
+</body>
+</html>

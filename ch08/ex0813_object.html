@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>도서관 관리 시스템</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .container { max-width: 800px; margin: 0 auto; }
+    .menu { background-color: #f0f0f0; padding: 20px; margin-bottom: 20px; }
+    .menu button { margin: 5px; padding: 10px 20px; font-size: 16px; }
+    .form-container { background-color: #f9f9f9; padding: 20px; margin-bottom: 20px; }
+    .input-group { margin-bottom: 15px; }
+    .input-group label { display: inline-block; width: 120px; font-weight: bold; }
+    .input-group input { padding: 5px; width: 200px; }
+    .result { background-color: #fff; border: 1px solid #ddd; padding: 20px; max-height: 400px; overflow-y: auto; }
+    .book-item { border-bottom: 1px solid #eee; padding: 10px 0; }
+    .message { background-color: #dff0d8; border: 1px solid #d6e9c6; color: #3c763d; padding: 10px; margin: 10px 0; border-radius: 4px; }
+    .error { background-color: #f2dede; border: 1px solid #ebccd1; color: #a94442; }
+    .hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>도서관 관리 시스템</h1>
+    
+    <div class="menu">
+        <button onclick="showAddForm()">책 추가</button>
+        <button onclick="showSearchForm()">책 검색</button>
+        <button onclick="showAllBooks()">전체 목록 보기</button>
+        <button onclick="showStatistics()">통계 보기</button>
+    </div>
+    
+    <!-- 책 추가 폼 -->
+    <div id="addForm" class="form-container hidden">
+        <h3>새 책 추가</h3>
+        <div class="input-group">
+            <label for="title">제목:</label>
+            <input type="text" id="title" required>
+        </div>
+        <div class="input-group">
+            <label for="author">저자:</label>
+            <input type="text" id="author" required>
+        </div>
+        <div class="input-group">
+            <label for="year">출판년도:</label>
+            <input type="number" id="year" required>
+        </div>
+        <div class="input-group">
+            <label for="isbn">ISBN:</label>
+            <input type="text" id="isbn" required>
+        </div>
+        <button onclick="addBook()">책 추가</button>
+        <button onclick="hideAllForms()">취소</button>
+    </div>
+    
+    <!-- 검색 폼 -->
+    <div id="searchForm" class="form-container hidden">
+        <h3>책 검색</h3>
+        <div class="input-group">
+            <label for="searchTitle">제목:</label>
+            <input type="text" id="searchTitle" placeholder="검색할 제목을 입력하세요">
+        </div>
+        <button onclick="searchBooks()">검색</button>
+        <button onclick="hideAllForms()">취소</button>
+    </div>
+    
+    <!-- 결과 표시 영역 -->
+    <div id="result" class="result"></div>
+</div>
+
+<script type="text/javascript">
+    // 책 생성자 함수
+    function Book(title, author, year, isbn) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.isbn = isbn;
+        
+        this.toString = function() {
+            return "제목: " + this.title + ", 저자: " + this.author + 
+                   ", 출판년도: " + this.year + ", ISBN: " + this.isbn;
+        };
+    }
+    
+    // 도서관 객체
+    var library = {
+        books: [],
+        
+        // 책 추가
+        addBook: function(book) {
+            this.books.push(book);
+            this.showMessage("책이 추가되었습니다: " + book.title);
+        },
+        
+        // 제목으로 책 검색
+        searchByTitle: function(title) {
+            var found = [];
+            for(var i = 0; i < this.books.length; i++) {
+                if(this.books[i].title.toLowerCase().indexOf(title.toLowerCase()) !== -1) {
+                    found.push(this.books[i]);
+                }
+            }
+            return found;
+        },
+        
+        // 모든 책 목록
+        listAllBooks: function() {
+            return this.books;
+        },
+        
+        // 평균 출판년도 계산
+        getAverageYear: function() {
+            if(this.books.length === 0) return 0;
+            
+            var sum = 0;
+            for(var i = 0; i < this.books.length; i++) {
+                sum += this.books[i].year;
+            }
+            return (sum / this.books.length).toFixed(1);
+        },
+        
+        // 메시지 표시
+        showMessage: function(message, isError) {
+            var messageClass = isError ? "message error" : "message";
+            displayResult('<div class="' + messageClass + '">' + message + '</div>');
+        }
+    };
+    
+    // 폼과 결과 표시 함수들
+    function hideAllForms() {
+        document.getElementById('addForm').classList.add('hidden');
+        document.getElementById('searchForm').classList.add('hidden');
+    }
+    
+    function showAddForm() {
+        hideAllForms();
+        document.getElementById('addForm').classList.remove('hidden');
+        clearForm();
+    }
+    
+    function showSearchForm() {
+        hideAllForms();
+        document.getElementById('searchForm').classList.remove('hidden');
+        document.getElementById('searchTitle').value = '';
+    }
+    
+    function clearForm() {
+        document.getElementById('title').value = '';
+        document.getElementById('author').value = '';
+        document.getElementById('year').value = '';
+        document.getElementById('isbn').value = '';
+    }
+    
+    function displayResult(html) {
+        document.getElementById('result').innerHTML = html;
+    }
+    
+    function addBook() {
+        var title = document.getElementById('title').value;
+        var author = document.getElementById('author').value;
+        var year = parseInt(document.getElementById('year').value);
+        var isbn = document.getElementById('isbn').value;
+        
+        if (!title || !author || !year || !isbn) {
+            library.showMessage("모든 필드를 입력해 주세요.", true);
+            return;
+        }
+        
+        if (isNaN(year) || year < 0 || year > new Date().getFullYear()) {
+            library.showMessage("올바른 출판년도를 입력해 주세요.", true);
+            return;
+        }
+        
+        var newBook = new Book(title, author, year, isbn);
+        library.addBook(newBook);
+        clearForm();
+        hideAllForms();
+    }
+    
+    function searchBooks() {
+        var searchTitle = document.getElementById('searchTitle').value;
+        
+        if (!searchTitle) {
+            library.showMessage("검색할 제목을 입력해 주세요.", true);
+            return;
+        }
+        
+        var results = library.searchByTitle(searchTitle);
+        hideAllForms();
+        
+        if (results.length > 0) {
+            var html = '<h3>검색 결과 (' + results.length + '권)</h3>';
+            for (var i = 0; i < results.length; i++) {
+                html += '<div class="book-item">' + (i + 1) + '. ' + results[i].toString() + '</div>';
+            }
+            displayResult(html);
+        } else {
+            library.showMessage("검색 결과가 없습니다.", true);
+        }
+    }
+    
+    function showAllBooks() {
+        hideAllForms();
+        var allBooks = library.listAllBooks();
+        
+        if (allBooks.length === 0) {
+            library.showMessage("등록된 책이 없습니다.", true);
+            return;
+        }
+        
+        var html = '<h3>전체 도서 목록 (' + allBooks.length + '권)</h3>';
+        for (var i = 0; i < allBooks.length; i++) {
+            html += '<div class="book-item">' + (i + 1) + '. ' + allBooks[i].toString() + '</div>';
+        }
+        displayResult(html);
+    }
+    
+    function showStatistics() {
+        hideAllForms();
+        var avgYear = library.getAverageYear();
+        var currentYear = new Date().getFullYear();
+        var recentBooks = 0;
+        
+        for (var i = 0; i < library.books.length; i++) {
+            if (library.books[i].year >= currentYear - 5) {
+                recentBooks++;
+            }
+        }
+        
+        var html = '<h3>도서관 통계</h3>';
+        html += '<div class="book-item"><strong>총 책 수:</strong> ' + library.books.length + '권</div>';
+        html += '<div class="book-item"><strong>평균 출판년도:</strong> ' + avgYear + '년</div>';
+        html += '<div class="book-item"><strong>최근 5년간 출간된 책:</strong> ' + recentBooks + '권</div>';
+        
+        if (library.books.length > 0) {
+            // 가장 오래된 책과 최신 책 찾기
+            var oldestBook = library.books[0];
+            var newestBook = library.books[0];
+            
+            for (var i = 1; i < library.books.length; i++) {
+                if (library.books[i].year < oldestBook.year) {
+                    oldestBook = library.books[i];
+                }
+                if (library.books[i].year > newestBook.year) {
+                    newestBook = library.books[i];
+                }
+            }
+            
+            html += '<div class="book-item"><strong>가장 오래된 책:</strong> ' + oldestBook.title + ' (' + oldestBook.year + '년)</div>';
+            html += '<div class="book-item"><strong>가장 최신의 책:</strong> ' + newestBook.title + ' (' + newestBook.year + '년)</div>';
+        }
+        
+        displayResult(html);
+    }
+    
+    // 초기 샘플 데이터 추가
+    library.addBook(new Book("웹 프로그래밍", "홍길동", 2021, "978-1234567890"));
+    library.addBook(new Book("JavaScript 기초", "김철수", 2020, "978-0987654321"));
+    library.addBook(new Book("HTML5 입문", "이영희", 2019, "978-1122334455"));
+    
+    // 초기 화면에 전체 목록 표시
+    showAllBooks();
+</script>
+</body>
+</html>

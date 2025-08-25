@@ -1,0 +1,250 @@
+<!--
+연습문제 5: 색상 변경 및 스타일 조작
+문제: 동적으로 색상과 스타일을 변경할 수 있는 프로그램을 만드세요.
+
+RGB 값으로 색상 설정
+폰트 크기 조절
+텍스트 스타일 변경 (굵기, 기울임)
+선택한 요소에 애니메이션 효과 적용
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>색상 및 스타일 조작기</title>
+<style>
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+    }
+    
+    .controls {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    
+    .control-group {
+        margin-bottom: 15px;
+    }
+    
+    .control-group label {
+        display: inline-block;
+        width: 100px;
+        font-weight: bold;
+    }
+    
+    .slider {
+        width: 200px;
+        appearance: none;
+        height: 10px;
+        border-radius: 5px;
+        background: #ddd;
+        outline: none;
+    }
+    
+    .slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #007bff;
+        cursor: pointer;
+    }
+    
+    #textElement {
+        padding: 30px;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 24px;
+        color: #000;
+        background-color: #fff;
+        transition: all 0.3s ease;
+        min-height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .button-group {
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        margin: 5px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .input-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .color-value {
+        font-family: monospace;
+        background-color: #e9ecef;
+        padding: 2px 6px;
+        border-radius: 3px;
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+    
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>색상 및 스타일 조작기</h1>
+    
+    <div class="controls">
+        <h3>색상 설정 (RGB)</h3>
+        <div class="control-group">
+            <div class="input-group">
+                <label for="redSlider">빨강:</label>
+                <input type="range" id="redSlider" class="slider" min="0" max="255" value="0" oninput="updateColor()">
+                <span class="color-value" id="redValue">0</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="input-group">
+                <label for="greenSlider">초록:</label>
+                <input type="range" id="greenSlider" class="slider" min="0" max="255" value="0" oninput="updateColor()">
+                <span class="color-value" id="greenValue">0</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="input-group">
+                <label for="blueSlider">파랑:</label>
+                <input type="range" id="blueSlider" class="slider" min="0" max="255" value="0" oninput="updateColor()">
+                <span class="color-value" id="blueValue">0</span>
+            </div>
+        </div>
+        
+        <h3>스타일 설정</h3>
+        <div class="control-group">
+            <div class="input-group">
+                <label for="fontSizeSlider">폰트 크기:</label>
+                <input type="range" id="fontSizeSlider" class="slider" min="12" max="72" value="24" oninput="updateFontSize()">
+                <span class="color-value" id="fontSizeValue">24px</span>
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label>
+                <input type="checkbox" id="boldCheck" onchange="updateFontWeight()"> 굵게
+            </label>
+            <label style="margin-left: 20px;">
+                <input type="checkbox" id="italicCheck" onchange="updateFontStyle()"> 기울임
+            </label>
+        </div>
+        
+        <div class="control-group">
+            <label for="textInput">텍스트 변경:</label>
+            <input type="text" id="textInput" value="스타일을 변경해보세요!" oninput="updateText()" style="width: 300px; padding: 8px;">
+        </div>
+    </div>
+    
+    <div id="textElement">스타일을 변경해보세요!</div>
+    
+    <div class="button-group">
+        <button class="btn" onclick="applyAnimation('pulse')">펄스 효과</button>
+        <button class="btn" onclick="applyAnimation('rotate')">회전 효과</button>
+        <button class="btn" onclick="applyAnimation('shake')">흔들기 효과</button>
+        <button class="btn" onclick="resetStyles()">초기화</button>
+    </div>
+</div>
+
+<script>
+function updateColor() {
+    var red = document.getElementById('redSlider').value;
+    var green = document.getElementById('greenSlider').value;
+    var blue = document.getElementById('blueSlider').value;
+    
+    document.getElementById('redValue').textContent = red;
+    document.getElementById('greenValue').textContent = green;
+    document.getElementById('blueValue').textContent = blue;
+    
+    var color = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
+    document.getElementById('textElement').style.color = color;
+}
+
+function updateFontSize() {
+    var size = document.getElementById('fontSizeSlider').value;
+    document.getElementById('fontSizeValue').textContent = size + 'px';
+    document.getElementById('textElement').style.fontSize = size + 'px';
+}
+
+function updateFontWeight() {
+    var bold = document.getElementById('boldCheck').checked;
+    document.getElementById('textElement').style.fontWeight = bold ? 'bold' : 'normal';
+}
+
+function updateFontStyle() {
+    var italic = document.getElementById('italicCheck').checked;
+    document.getElementById('textElement').style.fontStyle = italic ? 'italic' : 'normal';
+}
+
+function updateText() {
+    var text = document.getElementById('textInput').value;
+    document.getElementById('textElement').textContent = text || '스타일을 변경해보세요!';
+}
+
+function applyAnimation(animationType) {
+    var element = document.getElementById('textElement');
+    element.style.animation = 'none';
+    
+    setTimeout(function() {
+        element.style.animation = animationType + ' 1s ease-in-out';
+    }, 10);
+    
+    setTimeout(function() {
+        element.style.animation = 'none';
+    }, 1000);
+}
+
+function resetStyles() {
+    document.getElementById('redSlider').value = 0;
+    document.getElementById('greenSlider').value = 0;
+    document.getElementById('blueSlider').value = 0;
+    document.getElementById('fontSizeSlider').value = 24;
+    document.getElementById('boldCheck').checked = false;
+    document.getElementById('italicCheck').checked = false;
+    document.getElementById('textInput').value = '스타일을 변경해보세요!';
+    
+    var element = document.getElementById('textElement');
+    element.style.color = 'rgb(0, 0, 0)';
+    element.style.fontSize = '24px';
+    element.style.fontWeight = 'normal';
+    element.style.fontStyle = 'normal';
+    element.textContent = '스타일을 변경해보세요!';
+    element.style.animation = 'none';
+    
+    updateColor();
+    updateFontSize();
+}
+</script>
+</body>
+</html>

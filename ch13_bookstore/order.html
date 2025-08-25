@@ -1,0 +1,165 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title> Order Page </title>
+<link rel="stylesheet" type="text/css" href="css/style-size.css"/>
+<link rel="stylesheet" type="text/css" href="css/style-layout.css"/>
+<link rel="stylesheet" type="text/css" href="css/style-presentation.css"/>
+<style>
+    .order-summary {
+        background-color: #f0f8ff;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+</style>
+</head>
+<body id="order">
+<div class="head"> 서적 주문 양식 </div>
+<form id="orderForm" action="">
+    <p> 주문서 </p>
+    <table>
+        <tr> <th> 책 제목 </th> <th> 가격 </th> <th> 수량 </th> <th> 합계 </th> </tr>
+        <tr>
+            <td> 멀티미디어 배움터2.0 </td> <td> 25,000원 </td>
+            <td> <input type="number" id="book1" min="0" value="0" onchange="updateTotal(1)"/> </td>
+            <td> <span id="total1">0</span> 원</td>
+        </tr>
+        <tr>
+            <td> (알기 쉬운) 알고리즘 </td> <td> 24,000원 </td>
+            <td> <input type="number" id="book2" min="0" value="0" onchange="updateTotal(2)"/> </td>
+            <td> <span id="total2">0</span> 원</td>
+        </tr>
+        <tr>
+            <td> 비즈니스 정보 시스템 </td> <td> 28,000원 </td>
+            <td> <input type="number" id="book3" min="0" value="0" onchange="updateTotal(3)"/> </td>
+            <td> <span id="total3">0</span> 원</td>
+        </tr>
+        <tr style="background-color: #f5f5f5; font-weight: bold;">
+            <td> 합계 </td> <td> &nbsp; </td>
+            <td> <span id="totalCount">0</span> </td>
+            <td> <span id="totalPrice">0</span> 원</td>
+        </tr>
+    </table> <br />
+    
+    <div class="order-summary" id="orderSummary" style="display: none;">
+        <h3>주문 요약</h3>
+        <div id="orderDetails"></div>
+    </div>
+    
+    <input type="button" value="합계계산" onclick="calculateTotal()"/>
+    <input type="reset" value="초기화" onclick="resetForm()"/>
+    <input type="submit" value="주문하기" onclick="submitOrder(event)"/>
+</form>
+
+<script>
+const bookPrices = [25000, 24000, 28000];
+const bookNames = [
+    "멀티미디어 배움터2.0",
+    "(알기 쉬운) 알고리즘", 
+    "비즈니스 정보 시스템"
+];
+
+function updateTotal(bookNum) {
+    const quantity = document.getElementById(`book${bookNum}`).value;
+    const price = bookPrices[bookNum - 1];
+    const total = quantity * price;
+    document.getElementById(`total${bookNum}`).textContent = total.toLocaleString();
+    calculateTotal();
+}
+
+function calculateTotal() {
+    let totalCount = 0;
+    let totalPrice = 0;
+    
+    for (let i = 1; i <= 3; i++) {
+        const quantity = parseInt(document.getElementById(`book${i}`).value) || 0;
+        const price = bookPrices[i - 1];
+        totalCount += quantity;
+        totalPrice += quantity * price;
+    }
+    
+    document.getElementById('totalCount').textContent = totalCount;
+    document.getElementById('totalPrice').textContent = totalPrice.toLocaleString();
+    
+    // 주문 요약 표시
+    if (totalCount > 0) {
+        showOrderSummary();
+    } else {
+        document.getElementById('orderSummary').style.display = 'none';
+    }
+}
+
+function showOrderSummary() {
+    const orderDetails = document.getElementById('orderDetails');
+    let details = '';
+    
+    for (let i = 1; i <= 3; i++) {
+        const quantity = parseInt(document.getElementById(`book${i}`).value) || 0;
+        if (quantity > 0) {
+            const total = quantity * bookPrices[i - 1];
+            details += `<p>${bookNames[i - 1]}: ${quantity}권 - ${total.toLocaleString()}원</p>`;
+        }
+    }
+    
+    orderDetails.innerHTML = details;
+    document.getElementById('orderSummary').style.display = 'block';
+}
+
+function resetForm() {
+    for (let i = 1; i <= 3; i++) {
+        document.getElementById(`book${i}`).value = 0;
+        document.getElementById(`total${i}`).textContent = '0';
+    }
+    document.getElementById('totalCount').textContent = '0';
+    document.getElementById('totalPrice').textContent = '0';
+    document.getElementById('orderSummary').style.display = 'none';
+}
+
+function submitOrder(event) {
+    event.preventDefault();
+    
+    const totalCount = parseInt(document.getElementById('totalCount').textContent);
+    if (totalCount === 0) {
+        alert('주문할 책을 선택해주세요.');
+        return;
+    }
+    
+    const totalPrice = document.getElementById('totalPrice').textContent;
+    const confirmed = confirm(`총 ${totalCount}권, ${totalPrice}원을 주문하시겠습니까?`);
+    
+    if (confirmed) {
+        // 주문 데이터 수집
+        const orderData = {
+            items: [],
+            totalCount: totalCount,
+            totalPrice: parseInt(totalPrice.replace(/,/g, '')),
+            timestamp: new Date().toISOString()
+        };
+        
+        for (let i = 1; i <= 3; i++) {
+            const quantity = parseInt(document.getElementById(`book${i}`).value) || 0;
+            if (quantity > 0) {
+                orderData.items.push({
+                    bookName: bookNames[i - 1],
+                    quantity: quantity,
+                    price: bookPrices[i - 1],
+                    total: quantity * bookPrices[i - 1]
+                });
+            }
+        }
+        
+        // LocalStorage에 주문 내역 저장
+        const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+        orders.push(orderData);
+        localStorage.setItem('orders', JSON.stringify(orders));
+        
+        alert('주문이 완료되었습니다!');
+        resetForm();
+    }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>서비스 페이지</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 5px;
+        }
+        nav a:hover {
+            background-color: #555;
+            color: yellow;
+        }
+        nav a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .services {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .service-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            transition: transform 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .service-card h3 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="page1.html">홈</a>
+        <a href="page2.html">소개</a>
+        <a href="page3.html" class="active">서비스</a>
+        <a href="page4.html">문의</a>
+    </nav>
+
+    <div class="content">
+        <h1>서비스</h1>
+        <p>저희가 제공하는 서비스 목록입니다. 각 서비스에 대한 자세한 정보를 확인하세요.</p>
+        
+        <div class="services">
+            <div class="service-card">
+                <h3>웹 디자인</h3>
+                <p>사용자 경험을 중심으로 한 현대적이고 반응형 웹 디자인 서비스를 제공합니다.</p>
+                <a href="#">자세히 보기</a>
+            </div>
+            
+            <div class="service-card">
+                <h3>프론트엔드 개발</h3>
+                <p>HTML, CSS, JavaScript를 활용한 고품질 프론트엔드 개발 서비스를 제공합니다.</p>
+                <a href="#">자세히 보기</a>
+            </div>
+            
+            <div class="service-card">
+                <h3>CSS 컨설팅</h3>
+                <p>가상 클래스, 애니메이션 등 CSS의 고급 기능을 활용한 컨설팅 서비스를 제공합니다.</p>
+                <a href="#">자세히 보기</a>
+            </div>
+            
+            <div class="service-card">
+                <h3>웹 접근성 개선</h3>
+                <p>웹 접근성 지침에 맞춰 기존 웹사이트를 개선하는 서비스를 제공합니다.</p>
+                <a href="#">자세히 보기</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

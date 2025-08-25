@@ -1,0 +1,49 @@
+/* 반응형 디자인 */
+@media screen and (max-width: 768px) {
+    .wrap {
+        width: 100%;
+        min-width: 320px;
+    }
+    
+    #logo {
+        font-size: 36px;
+        margin: 15px 0 0 10px;
+    }
+    
+    nav {
+        width: 100%;
+    }
+    
+    nav ul li {
+        margin: 0 2px;
+    }
+    
+    .booklist ul li {
+        width: calc(50% - 10px);
+    }
+    
+    article, aside {
+        width: 100%;
+        float: none;
+    }
+    
+    iframe {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .booklist ul li {
+        width: 100%;
+    }
+    
+    nav ul li {
+        float: none;
+        width: 100%;
+        text-align: center;
+    }
+    
+    #login, #signup, #order {
+        margin: 10px;
+    }
+}

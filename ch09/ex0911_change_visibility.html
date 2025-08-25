@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="euc-kr">
+<title> CSS Access using JavaScript </title>
+</head>
+<body>
+
+<div id="outerBox" style="background: blue; width: 550px; height:300px;" />
+
+<div id="innerBox"
+     style="background: yellow; width: 450px; height:200px;
+            position: absolute; left: 50px; top: 50px;" />
+
+    <img id="img1" src="images/image1.png" width="100px"
+       style="position: absolute; left: 50px; top: 25px; visibility: visible;" />
+
+    <img id="img2" src="images/image2.png" width="100px"
+       style="position: absolute; left: 175px; top: 25px; visibility: visible;" />
+
+    <img id="img3" src="images/image3.png" width="100px"
+       style="position: absolute; left: 300px; top: 25px; visibility: visible;" />
+</div>
+
+</div>
+
+<script type="text/javascript">
+function toggleVisibility(id) {
+    var dom = document.getElementById(id);
+
+    if (dom.style.visibility == "visible")
+      dom.style.visibility = "hidden";
+    else
+      dom.style.visibility = "visible";
+}
+</script>
+
+Toggle Visibility:
+<button onclick = "toggleVisibility('img1');">Image 1</button>
+<button onclick = "toggleVisibility('img2');">Image 2</button>
+<button onclick = "toggleVisibility('img3');">Image 3</button>
+
+</body>
+</html>

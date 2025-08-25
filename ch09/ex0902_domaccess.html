@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> DOM Access </title>
+</head>
+<body>
+
+<form action="">
+<input id="username" type="text" value="Name of User" />
+</form>
+
+<script type="text/javascript">
+    var dom = document.getElementById("username");
+    alert(dom.value);
+    var newValue = prompt("Type new value of text box", "");
+    dom.value = newValue;
+</script>
+
+</body>
+</html>

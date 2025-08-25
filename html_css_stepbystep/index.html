@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>String - 클래식 기타 동아리</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery-1.9.1.js"></script>
+    <script src="js/coin-slider.min.js"></script>
+    <link rel="stylesheet" href="css/coin-slider-styles.css" type="text/css" />
+    <script>
+      $(document).ready(function () {
+        $("#coin-slider").coinslider();
+      });
+    </script>
+    <style>
+      body {
+        background: none;
+      }
+      #coin-slider {
+        margin: 0 auto;
+      }
+      #notice {
+        width: 565px;
+        margin: 10px auto;
+      }
+      form {
+        text-align: center;
+      }
+      #entrance {
+        border-radius: 8px;
+        padding: 15px;
+        background-color: #2e73c7;
+        color: white;
+      }
+      #entrance:hover {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <header>
+        <h1>String 동아리</h1>
+      </header>
+      <section>
+        <div id="coin-slider">
+          <a href="intro.html">
+            <img src="images/photo1.jpg" />
+            <span>첫번째 그림의 캡션</span>
+          </a>
+          <a href="intro.html">
+            <img src="images/photo2.jpg" />
+          </a>
+          <a href="intro.html">
+            <img src="images/photo3.jpg" />
+          </a>
+        </div>
+        <div id="notice">
+          <h3>신입생을 모집합니다.</h3>
+          <p>
+            String은 신입생들 뿐만 아니라 재학생들에게도 활짝 열려 있습니다.
+            기타를 못 치셔도 동아리의 강습을 통해 기초부터 배울 수 있습니다.
+            또한 선배들로부터 대학생활에 대한 많은 조언도 들을 수 있을 것입니다.
+            언제나 환영합니다.
+          </p>
+          <form>
+            <input
+              type="button"
+              value="노크하세요"
+              id="entrance"
+              onclick="location.href='intro.html'"
+            />
+          </form>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

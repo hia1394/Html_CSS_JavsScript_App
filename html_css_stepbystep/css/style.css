@@ -1,0 +1,24 @@
+﻿body {
+    font-family: "맑은 고딕", "돋움", "굴림";               
+    /*
+    background: bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment
+       bg-images : url('../images/bg.jpg') 
+       bg-repeat : no-repeat : 
+       bg-position (배경 위치) : left(가로위치-왼쪽) top(세로위치-상단) : 
+       bg-attachment (배경 고정) : fixed 페이지를 스크롤해도 배경은 움직이지 않음
+    */
+    
+    /*
+    background-size
+    : cover
+        비율 유지하며 요소 전체를 덮음
+        이미지 일부가 잘릴 수 있음
+        풀스크린 배경에 최적
+    : contain
+        비율 유지하며 요소 안에 완전 포함
+        여백이 생길 수 있음
+        로고, 아이콘에 최적
+    */
+    
+}
+

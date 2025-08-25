@@ -1,0 +1,92 @@
+<!--
+연습문제 5: 둥근 모서리와 그림자 효과 적용하기
+문제: ex631_border.html과 ex632_boxshadow.html을 참고하여 다음을 만족하는 웹 페이지를 만드세요.
+
+자신의 이력서 형태의 문서 만들기
+각 섹션(인적사항, 학력, 경력 등)을 둥근 모서리 박스로 만들기
+각 박스에 다른 그림자 효과 적용하기
+프로필 이미지에 원형 테두리와 그림자 효과 추가하기
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>나의 이력서</title>
+    <style type="text/css">
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .section {
+        margin: 20px 0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+      }
+      #profile {
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+      #education {
+        background-color: #f0f8ff;
+        box-shadow: 3px 3px 10px rgba(0, 0, 100, 0.3);
+      }
+      #experience {
+        background-color: #fff0f5;
+        box-shadow: 0 0 15px rgba(100, 0, 0, 0.2);
+      }
+      #skills {
+        background-color: #f0fff0;
+        box-shadow: 5px 5px 5px rgba(0, 100, 0, 0.2);
+      }
+      .profile-img {
+        float: right;
+        width: 120px;
+        height: 120px;
+        border-radius: 60px;
+        object-fit: cover;
+        border: 3px solid #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+      h1 {
+        color: #333;
+      }
+      h2 {
+        color: #666;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section" id="profile">
+      <img src="profile.jpg" class="profile-img" alt="프로필 사진" />
+      <h1>홍길동</h1>
+      <p>웹 개발자</p>
+      <p>이메일: hong@example.com | 전화: 010-1234-5678</p>
+      <p>주소: 서울시 강남구</p>
+    </div>
+
+    <div class="section" id="education">
+      <h2>학력</h2>
+      <p><strong>2015-2019</strong> - 한국대학교 컴퓨터공학과 학사</p>
+      <p><strong>2019-2021</strong> - 한국대학교 컴퓨터공학과 석사</p>
+    </div>
+
+    <div class="section" id="experience">
+      <h2>경력</h2>
+      <p><strong>2021-현재</strong> - ABC 기업 웹 개발팀</p>
+      <ul>
+        <li>반응형 웹 디자인 구현</li>
+        <li>사용자 인터페이스 개선</li>
+        <li>웹 성능 최적화</li>
+      </ul>
+    </div>
+
+    <div class="section" id="skills">
+      <h2>기술 스택</h2>
+      <p><strong>프론트엔드:</strong> HTML, CSS, JavaScript, React</p>
+      <p><strong>백엔드:</strong> Node.js, Express, PHP</p>
+      <p><strong>데이터베이스:</strong> MySQL, MongoDB</p>
+    </div>
+  </body>
+</html>

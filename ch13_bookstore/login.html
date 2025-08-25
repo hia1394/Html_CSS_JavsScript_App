@@ -1,0 +1,82 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title> Login Page </title>
+<link rel="stylesheet" type="text/css" href="css/style-size.css"/>
+<link rel="stylesheet" type="text/css" href="css/style-layout.css"/>
+<link rel="stylesheet" type="text/css" href="css/style-presentation.css"/>
+</head>
+<body id="login">
+    <form id="loginForm">    
+        <a href="signup.html" target="display_area">회원가입</a>
+        <a href="#" onclick="alert('아이디/비밀번호 찾기 기능은 준비중입니다.')">아이디/비밀번호찾기</a>
+        <fieldset>
+            <span>사용자 아이디</span>
+            <input id="username" type="text" required/><br/>
+            <span>비밀번호</span>
+            <input id="password" type="password" required><br/>
+            <span></span>
+            <input id="login_button" type="submit" value="로그인"/>
+            <input id="reset" type="button" value="취소" onclick="resetForm()"/>
+        </fieldset>
+    </form> 
+
+    <script type="text/javascript">
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // 간단한 사용자 인증 (실제 서버 인증으로 대체해야 함)
+            if (username === 'admin' && password === 'admin123') {
+                alert('로그인 성공!');
+                
+                // 로그인 상태 저장
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', username);
+                
+                // 부모 창에 알림
+                if (window.parent !== window) {
+                    window.parent.postMessage({
+                        type: 'login',
+                        username: username
+                    }, '*');
+                }
+                
+                // 관리자 페이지로 이동
+                window.parent.document.querySelector('iframe[name="display_area"]').src = 'admin_dashboard.html';
+            } else {
+                // 일반 사용자 데이터베이스 확인 (localStorage 사용)
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const user = users.find(u => u.username === username && u.password === password);
+                
+                if (user) {
+                    alert(`안녕하세요, ${user.name}님!`);
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('username', username);
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    
+                    if (window.parent !== window) {
+                        window.parent.postMessage({
+                            type: 'login',
+                            username: username
+                        }, '*');
+                    }
+                    
+                    // 메인 페이지의 기본 화면으로 이동
+                    window.parent.document.querySelector('iframe[name="display_area"]').src = 'images/books.jpg';
+                } else {
+                    alert('아이디 또는 비밀번호가 올바르지 않습니다.');
+                }
+            }
+        });
+        
+        function resetForm() {
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+    </script>
+</body>
+</html>

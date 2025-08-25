@@ -1,0 +1,45 @@
+<!--
+연습문제 1: 목록 스타일 적용하기
+문제: ex611_list_style.html를 참고하여 다음 요구사항을 만족하는 웹 페이지를 만드세요.
+
+좋아하는 음식 목록을 순서 있는 목록(ol)으로 작성
+각 음식의 재료를 순서 없는 목록(ul)으로 작성
+국내 음식의 재료는 동그라미(circle), 외국 음식의 재료는 채워진 원(disc), 특별 재료는 사각형(square)으로 표시하기
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>좋아하는 음식 목록</title>
+    <style type="text/css">
+      ol li {
+        list-style-type: decimal;
+      }
+      li.kor {
+        list-style-type: circle;
+      }
+      li.foreign {
+        list-style-type: disc;
+      }
+      li.special {
+        list-style-type: square;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>좋아하는 음식 목록</h3>
+    <ol>
+      <li>김치찌개</li>
+      <ul>
+        <li class="kor">김치</li>
+        <li class="kor">돼지고기</li>
+        <li class="special">두부</li>
+      </ul>
+      <li>파스타</li>
+      <ul>
+        <li class="foreign">스파게티면</li>
+        <li class="foreign">토마토 소스</li>
+        <li class="special">파마산 치즈</li>
+      </ul>
+    </ol>
+  </body>
+</html>

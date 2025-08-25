@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> Date & Math Objects </title>
+</head>
+<body>
+
+<script  type="text/javascript" >  
+    var today = new Date();
+    var y = today.getFullYear();
+    var m = today.getMonth() + 1;
+    var d = today.getDate();
+
+    document.write("오늘 날짜: " + y + "년 " + m + "월 " + d + "일<br/>");
+
+    var start = new Date();
+    var t1 = start.getTime();
+
+    var sum = 0;
+    for(i=0;i<1000000;i++) {
+        sum = sum + i;
+    }
+
+    var end = new Date();
+    var t2 = end.getTime();
+
+    document.write("1에서 1000000까지 더하는데 걸린 시간: " + (t2 - t1) + "ms<br/>");
+    document.write("<br/>");
+    document.write("sin(60도) = " + Math.sin(Math.PI/3) + "<br/>");
+    document.write("ceil(4.3) = " + Math.ceil(4.3) + "<br/>");
+    document.write("floor(4.3) = " + Math.floor(4.3) + "<br/>");
+    document.write("round(4.3) = " + Math.round(4.3) + "<br/>");
+</script>
+ 
+</body>
+</html>

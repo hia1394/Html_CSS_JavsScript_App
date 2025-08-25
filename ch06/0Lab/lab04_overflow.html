@@ -1,0 +1,56 @@
+<!--
+연습문제 4: 박스 모델과 오버플로우 속성 활용하기
+문제: ex624_size.html과 ex625_overflow.html을 참고하여 다음을 만족하는 웹 페이지를 만드세요.
+
+4개의 컨텐츠 박스를 만들고, 각각 다른 overflow 속성(visible, hidden, scroll, auto) 적용하기
+각 박스의 크기는 너비 200px, 높이 100px로 제한
+충분한 내용을 넣어 오버플로우가 발생하도록 하기
+각 박스에 테두리와 여백 추가하기
+-->
+<!doctype html>
+<html>  
+  <head>
+    <title>오버플로우 속성 연습</title>
+    <style type="text/css">  
+        .box {
+            width: 200px;
+            height: 100px;
+            margin: 20px;
+            padding: 10px;
+            border: 2px solid #333;
+            float: left;
+        }
+        #box1 { overflow: visible; background-color: #ffcccc; }
+        #box2 { overflow: hidden; background-color: #ccffcc; }
+        #box3 { overflow: scroll; background-color: #ccccff; }
+        #box4 { overflow: auto; background-color: #ffffcc; }
+        h3 { clear: both; }
+    </style>  
+  </head>
+  <body>
+    <h3>오버플로우(overflow) 속성 활용하기</h3> 
+    
+    <div class="box" id="box1">
+      <h4>Visible 속성</h4>
+      <p>이 박스는 overflow: visible 속성이 적용되었습니다. 내용이 박스를 벗어나도 모두 표시됩니다. 내용이 너무 많아 박스를 벗어나는 경우에도 모든 내용이 보입니다. 이는 기본 설정입니다.</p>
+    </div>
+    
+    <div class="box" id="box2">
+      <h4>Hidden 속성</h4>
+      <p>이 박스는 overflow: hidden 속성이 적용되었습니다. 내용이 박스를 벗어나면 벗어난 부분은 보이지 않게 됩니다. 내용이 너무 많아 박스를 벗어나는 경우 잘려서 보이게 됩니다.</p>
+    </div>
+    
+    <div class="box" id="box3">
+      <h4>Scroll 속성</h4>
+      <p>이 박스는 overflow: scroll 속성이 적용되었습니다. 내용의 양과 상관없이 항상 스크롤바가 표시됩니다. 내용이 많아 박스를 벗어나면 스크롤을 통해 모든 내용을 볼 수 있습니다. 내용이 적어도 스크롤바는 항상 표시됩니다.</p>
+    </div>
+    
+    <div class="box" id="box4">
+      <h4>Auto 속성</h4>
+      <p>이 박스는 overflow: auto 속성이 적용되었습니다. 내용이 박스를 벗어날 때만 스크롤바가 나타납니다. 내용이 박스 안에 모두 들어가면 스크롤바가 표시되지 않고, 내용이 많아 박스를 벗어날 때만 스크롤바가 나타납니다.</p>
+    </div>
+    
+    <h3>각 박스의 특징 비교</h3>
+    <p>위의 네 가지 박스를 비교해보면 각 overflow 속성의 특징을 명확히 알 수 있습니다. visible은 내용이 넘쳐도 모두 표시하고, hidden은 넘치는 내용을 숨기며, scroll은 항상 스크롤바를 표시하고, auto는 필요할 때만 스크롤바를 표시합니다.</p>
+  </body>
+</html>
