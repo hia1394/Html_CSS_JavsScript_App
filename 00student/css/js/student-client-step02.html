@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생 관리 시스템</title>
+    <style type="text/css">
+        /* body 태그에 전체 페이지의 기본 스타일을 설정 */
+        body {
+            font-family: Arial, sans-serif;
+            /* 글꼴을 Arial로 설정, Arial이 없으면 기본 sans-serif 글꼴 사용 */
+            margin: 0;
+            /* 브라우저 기본 여백(margin) 제거 */
+            padding: 20px;
+            /* 페이지 전체에 20픽셀의 안쪽 여백(padding) 추가 */
+            background-color: #f5f5f5;
+            /* 배경색을 연한 회색으로 설정 */
+        }
+
+        /* 메인 제목(h1)의 스타일을 설정합니다 */
+        h1 {
+            color: #333;
+            /* 텍스트 색상을 진한 회색으로 설정 */
+            text-align: center;
+            /* 텍스트를 중앙 정렬 */
+        }
+
+        /* 부제목(h2)의 스타일을 설정합니다 */
+        h2 {
+            color: #444;
+            /* 텍스트 색상을 중간 회색으로 설정 */
+            border-bottom: 2px solid #007bff;
+            /* 제목 아래에 2픽셀 두께의 파란색 밑줄 추가 */
+            padding-bottom: 5px;
+            /* 밑줄과 텍스트 사이에 5픽셀 간격 추가 */
+        }
+
+        /* 폼(form) 요소의 스타일을 설정합니다 */
+        form {
+            background-color: white;
+            /* 폼 배경색을 흰색으로 설정 */
+            padding: 20px;
+            /* 폼 안쪽에 20픽셀의 여백 추가 */
+            border-radius: 5px;
+            /* 폼 모서리를 5픽셀만큼 둥글게 만듦 */
+            margin-bottom: 20px;
+            /* 폼 아래에 20픽셀의 외부 여백 추가 */
+        }
+
+        /* 라벨(label) 요소의 스타일을 설정합니다 */
+        label {
+            display: block;
+            /* 라벨을 블록 요소로 표시(새 줄에서 시작) */
+            margin-bottom: 5px;
+            /* 라벨 아래에 5픽셀의 외부 여백 추가 */
+            color: #555;
+            /* 텍스트 색상을 중간 회색으로 설정 */
+        }
+
+        /* 입력 필드(input)의 스타일을 설정합니다 */
+        input {
+            width: 100%;
+            /* 입력 필드의 너비를 부모 요소의 100%로 설정 */
+            padding: 8px;
+            /* 입력 필드 안쪽에 8픽셀의 여백 추가 */
+            margin-bottom: 15px;
+            /* 입력 필드 아래에 15픽셀의 외부 여백 추가 */
+            border: 1px solid #928989;
+            /* 1픽셀 두께의 중간 회색 테두리 추가 */
+            border-radius: 3px;
+            /* 입력 필드 모서리를 3픽셀만큼 둥글게 만듦 */
+        }
+
+        /* 버튼(button) 요소의 기본 스타일을 설정합니다 */
+        button {
+            background-color: #007bff;
+            /* 버튼 배경색을 파란색으로 설정 */
+            color: white;
+            /* 버튼 텍스트 색상을 흰색으로 설정 */
+            padding: 10px 20px;
+            /* 버튼 안쪽 여백: 위아래 10px, 좌우 20px */
+            border: none;
+            /* 버튼의 기본 테두리 제거 */
+            border-radius: 3px;
+            /* 버튼 모서리를 3픽셀만큼 둥글게 만듦 */
+            cursor: pointer;
+            /* 마우스 커서를 손가락 모양으로 변경 */
+        }
+
+        /* 버튼에 마우스를 올렸을 때(:hover)의 스타일을 설정합니다 pseudo class selector */
+        button:hover {
+            background-color: #0056b3;
+            /* 배경색을 더 진한 파란색으로 변경 */
+        }
+
+        /* 테이블(table) 요소의 스타일을 설정합니다 */
+        table {
+            width: 100%;
+            /* 테이블의 너비를 부모 요소의 100%로 설정 */
+            border-collapse: collapse;
+            /* 테이블 셀 간의 경계선을 하나로 병합 */
+            background-color: white;
+            /* 테이블 배경색을 흰색으로 설정 */
+            border-radius: 5px;
+            /* 테이블 모서리를 5픽셀만큼 둥글게 만듦 */
+            overflow: hidden;
+            /* 테이블 내용이 경계를 넘어갈 때 숨김 */
+        }
+
+        /* 테이블 헤더(th)와 데이터 셀(td)의 공통 스타일을 설정합니다 */
+        th,
+        td {
+            padding: 10px;
+            /* 셀 내부에 10픽셀의 여백 추가 */
+            text-align: left;
+            /* 셀 내용을 왼쪽으로 정렬 */
+            border-bottom: 1px solid #ddd;
+            /* 셀 아래에 1픽셀 두께의 연한 회색 테두리 추가 */
+        }
+
+        /* 테이블 헤더(th)의 추가 스타일을 설정합니다 */
+        th {
+            background-color: #f8f9fa;
+            /* 헤더 배경색을 매우 연한 회색으로 설정 */
+            color: #333;
+            /* 헤더 텍스트 색상을 진한 회색으로 설정 */
+        }
+
+        /* 테이블 행(tr)에 마우스를 올렸을 때(:hover)의 스타일을 설정합니다 */
+        tr:hover {
+            background-color: #f5f5f5;
+            /* 행의 배경색을 연한 회색으로 변경 */
+        }
+    </style>
+</head>
+
+<body>
+    <h1>학생 관리 시스템</h1>
+
+    <div>
+        <h2>학생 등록</h2>
+        <form>
+            <label for="name">이름:</label>
+            <input type="text" name="name" id="name" required>
+
+            <label for="studentNumber">학번:</label>
+            <input type="text" name="studentNumber" id="studentNumber" required>
+
+            <label for="address">주소:</label>
+            <input type="text" name="address" id="address" required>
+
+            <label for="phoneNumber">전화번호:</label>
+            <input type="text" name="phoneNumber" id="phoneNumber" placeholder="00*-000*-0000"
+                pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" required>
+
+            <label for="email">이메일:</label>
+            <input type="email" name="email" id="email" placeholder="***@***.***" required>
+
+            <label for="dateOfBirth">생년월일:</label>
+            <input type="date" name="dateOfBirth" id="dateOfBirth">
+
+            <button type="submit">학생 등록</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>학생 리스트</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>학번</th>
+                    <th>주소</th>
+                    <th>전화번호</th>
+                    <th>이메일</th>
+                    <th>생년월일</th>
+                    <th>액션</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</body>
+
+</html>
