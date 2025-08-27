@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>도서 관리 시스템</title>
+  <link rel="stylesheet" href="./css/form.css" />
+</head>
+<body>
+  <h1>도서 관리 시스템</h1>
+
+  <div class="form-container">
+    <h2>도서 등록</h2>
+    <form id="bookForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="title">제목:</label>
+          <input type="text" name="title" id="title" required />
+        </div>
+        <div class="form-group">
+          <label for="author">저자:</label>
+          <input type="text" name="author" id="author" required />
+        </div>
+        <div class="form-group">
+          <label for="isbn">ISBN:</label>
+          <input type="text" name="isbn" id="isbn" placeholder="9781234567897" required />
+        </div>
+        <div class="form-group">
+          <label for="price">가격:</label>
+          <input type="number" name="price" id="price" min="0" step="1" required />
+        </div>
+        <div class="form-group">
+          <label for="publishDate">출판일:</label>
+          <input type="date" name="publishDate" id="publishDate" required />
+        </div>
+        <button type="submit">도서 등록</button>
+      </div>
+    </form>
+    <p id="formMessage" class="form-message" aria-live="polite"></p>
+  </div>
+
+  <div class="table-container">
+    <h2>도서 리스트</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>제목</th><th>저자</th><th>ISBN</th><th>가격</th><th>출판일</th>
+        </tr>
+      </thead>
+      <tbody id="bookTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- ✅ step04: html 내부에 JS -->
+  <script>
+    // 전역변수
+    const API_BASE_URL = "http://localhost:8080";
+
+    // DOM
+    const bookForm = document.getElementById("bookForm");
+    const bookTableBody = document.getElementById("bookTableBody");
+    const formMessage = document.getElementById("formMessage");
+
+    // 로드 훅 (목록은 서버연동 전이므로 콘솔만)
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("STEP4 페이지 로드");
+    });
+
+    // 제출: FormData → 객체 → 테이블에 즉시 추가(클라이언트 렌더링)
+    bookForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const fd = new FormData(bookForm);
+      fd.forEach((v,k)=>console.log(k,"=",v));
+
+      const book = {
+        title: (fd.get("title")||"").trim(),
+        author: (fd.get("author")||"").trim(),
+        isbn: (fd.get("isbn")||"").replace(/[-\s]/g,"").trim(),
+        price: (fd.get("price")||"").trim(),
+        publishDate: fd.get("publishDate") || ""
+      };
+
+      const err = validateBook(book);
+      if (err) { formMessage.textContent = err; return; }
+
+      appendRow(book);
+      formMessage.textContent = "폼 데이터가 테이블에 추가되었습니다. (STEP4)";
+      bookForm.reset();
+    });
+
+    function validateBook(b){
+      if(!b.title) return "제목을 입력하세요.";
+      if(!b.author) return "저자를 입력하세요.";
+      if(!b.isbn) return "ISBN을 입력하세요.";
+      if(!/^\d{10}(\d{3})?$/.test(b.isbn)) return "ISBN은 10자리 또는 13자리 숫자여야 합니다.";
+      if(b.price===""||b.price==null) return "가격을 입력하세요.";
+      if(!/^\d+$/.test(String(b.price))) return "가격은 0 이상의 정수입니다.";
+      if(!b.publishDate) return "출판일을 선택하세요.";
+      return null;
+    }
+
+    function appendRow(b){
+      const tr=document.createElement("tr");
+      tr.innerHTML = `
+        <td>${esc(b.title)}</td>
+        <td>${esc(b.author)}</td>
+        <td>${esc(b.isbn)}</td>
+        <td>${Number(b.price).toLocaleString("ko-KR")}</td>
+        <td>${esc((b.publishDate||"").slice(0,10))}</td>
+      `;
+      bookTableBody.appendChild(tr);
+    }
+    function esc(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;")}
+  </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생 관리 시스템</title>
+    <link rel="stylesheet" type="text/css" href="./css/form.css" />
+</head>
+
+<body>
+    <h1>학생 관리 시스템</h1>
+
+    <div class="form-container">
+      <h2>학생 등록</h2>
+      <form id="studentForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">이름:</label>
+            <input type="text" name="name" id="name" />
+          </div>
+
+          <div class="form-group">
+            <label for="studentNumber">학번:</label>
+            <input type="text" name="studentNumber" id="studentNumber" />
+          </div>
+          
+          <div class="form-group">
+            <label for="address">주소:</label>
+            <input type="text" name="address" id="address" />
+          </div>
+          
+          <div class="form-group">
+            <label for="phoneNumber">전화번호:</label>
+            <input
+              type="text"
+              name="phoneNumber"
+              id="phoneNumber"
+              placeholder="00*-000*-0000"
+              pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}"
+            />
+          </div>
+          
+          <div class="form-group">
+            <label for="email">이메일:</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="***@***.***"
+            />
+          </div>
+          
+          <div class="form-group">
+            <label for="dateOfBirth">생년월일:</label>
+            <input type="date" name="dateOfBirth" id="dateOfBirth" />
+          </div>
+          
+          <button type="submit">학생 등록</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="table-container">
+        <h2>학생 리스트</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>학번</th>
+                    <th>주소</th>
+                    <th>전화번호</th>
+                    <th>이메일</th>
+                    <th>생년월일</th>
+                    <th>액션</th>
+                </tr>
+            </thead>
+            <tbody id="studentTableBody"></tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+      //전역변수
+      const API_BASE_URL = "http://localhost:8080";
+
+      //DOM 엘리먼트 가져오기
+      const studentForm = document.getElementById("studentForm");
+      const studentTableBody = document.getElementById("studentTableBody");
+
+      //Document Load 이벤트 처리하기
+      document.addEventListener("DOMContentLoaded", function() {
+          loadStudents();
+      });
+      //StudentForm 의 Submit 이벤트 처리하기
+      studentForm.addEventListener("submit", function(event){
+        //기본으로 설정된 Event가 동작하지 않도록 하기 위함
+        event.preventDefault();
+        console.log("Form 이 체출 되었음....")
+
+        //FormData 객체생성 <form>엘리먼트를 객체로 변환
+        const stuFormData = new FormData(studentForm);
+        stuFormData.forEach((value, key) => {
+          console.log(key + ' = ' +  value);
+        });
+
+        //사용자 정의 Student Object Literal 객체생성 (공백 제거 trim())
+        const studentData = {
+          name: stuFormData.get("name").trim(),
+          studentNumber: stuFormData.get("studentNumber").trim(),
+          address: stuFormData.get("address").trim(),
+          phoneNumber: stuFormData.get("phoneNumber").trim(),
+          email: stuFormData.get("email").trim(),
+          dateOfBirth: stuFormData.get("dateOfBirth"),
+        }
+
+      }); //submit 이벤트
+
+      //Student(학생) 목록을 Load 하는 함수
+      function loadStudents() {
+          console.log("학생 목록 Load 중.....");
+      }
+    </script>
+</body>
+
+</html>
