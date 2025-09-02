@@ -1,24 +1,97 @@
-﻿body {
-    font-family: "맑은 고딕", "돋움", "굴림";               
-    /*
-    background: bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment
-       bg-images : url('../images/bg.jpg') 
-       bg-repeat : no-repeat : 
-       bg-position (배경 위치) : left(가로위치-왼쪽) top(세로위치-상단) : 
-       bg-attachment (배경 고정) : fixed 페이지를 스크롤해도 배경은 움직이지 않음
-    */
-    
-    /*
-    background-size
-    : cover
-        비율 유지하며 요소 전체를 덮음
-        이미지 일부가 잘릴 수 있음
-        풀스크린 배경에 최적
-    : contain
-        비율 유지하며 요소 안에 완전 포함
-        여백이 생길 수 있음
-        로고, 아이콘에 최적
-    */
-    
+﻿:root{
+  --panel-width: 1000px;
+  --tab-h: 70px;
 }
 
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  margin:0;
+  font-family:"Noto Sans KR", Arial, sans-serif;
+  background:#000 url("../images/bg.jpg") no-repeat center center fixed;
+  background-size:cover;
+  color:#333;
+}
+
+
+h1.brand{
+  width:var(--panel-width);
+  margin:48px auto 8px;
+  font-size:70px;
+  font-weight:800;
+  color:#2a2a2a;
+  letter-spacing:.2px;
+  text-shadow:0 1px 0 rgba(255,255,255,.6);
+}
+
+#wrapper{
+  width:var(--panel-width);
+  margin:0 auto 40px; 
+  border-radius:6px;
+  overflow:hidden;
+  box-shadow:0 16px 30px rgba(0,0,0,.35);
+}
+
+nav{
+  background:#2b2b2b;
+  padding:0 10px;
+  border-radius:6px 6px 0 0;
+  border:1px solid #222;
+  border-bottom:0;
+  height:var(--tab-h);
+  display:flex;
+  align-items:flex-end;
+}
+
+article{
+  padding:22px 26px 28px;
+  border-left:1px solid rgba(0,0,0,.4);
+  border-right:1px solid rgba(0,0,0,.4);
+  background:
+    linear-gradient(rgba(255,255,255,.94), rgba(255,255,255,.94)),
+    repeating-linear-gradient(-24deg, rgba(255,255,255,0) 0 78px, rgba(255,255,255,.42) 78px 82px);
+}
+
+nav ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  gap:8px;
+}
+nav ul li{margin:0}
+
+nav a{
+  display:block;
+  height:calc(var(--tab-h) - 6px);
+  padding:8px 16px 5px;
+  text-decoration:none;
+  color:#dcdcdc;
+  font-weight:700;
+  border-radius:4px 4px 0 0;
+}
+nav a:hover{background:rgba(255,255,255,.12); color:#fff}
+nav a.current{background:#efefef; color:#202020; box-shadow:inset 0 -2px 0 rgba(0,0,0,.25)}
+
+section{margin-top:10px; line-height:1.75}
+
+footer{
+  background:#5a5a5a;
+  color:#eee;
+  font-size:13px;
+  padding:14px 18px;
+  border:1px solid #444;
+  border-top:0;
+  border-radius:0 0 6px 6px;
+}
+
+h2{
+  margin:6px 0 16px;
+  padding-left:40px;
+  min-height:30px;
+  background:url("../images/icon.png") no-repeat 0 50%;
+  background-size:28px 28px;
+  font-size:40px;
+  letter-spacing:.2px;
+}

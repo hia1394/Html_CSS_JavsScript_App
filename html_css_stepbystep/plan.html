@@ -6,8 +6,39 @@
     <title>String - 클래식 기타 동아리</title>
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <style>
-	   
-	</style>	
+        caption{
+            text-align:center;
+            font-weight:800;
+            color:#333;
+            padding:10px 4px 12px;
+            margin-bottom:8px;
+        }
+        table{
+            width:520px;                 /* 표 너비(원하면 조정) */
+            max-width:92%;
+            margin:0 auto;
+            border-collapse:collapse;
+            background:#fff;
+            border:1px solid #d9d9d9;
+            border-radius:8px;
+            overflow:hidden;             /* 라운드 유지 */
+        }
+        th, td{
+            padding:12px 16px;
+            border-bottom:1px solid #e8e8e8;
+            vertical-align:middle;
+            font-size:14px;
+            text-align:left;
+        }
+        th{
+            width:70px;                  /* 월(3월/4월…) 칸 너비 */
+            background:#f3f4f6;
+            color:#222;
+            font-weight:800;
+        }
+        tbody tr:last-child td{border-bottom:none}
+    </style>
+
 </head>
 <body>
     <div id="wrapper">
